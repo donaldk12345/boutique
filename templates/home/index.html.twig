@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<style>
+
+/*u.truncate(10 ,'....')*/
+.container .row .card img{
+  
+}
+*{
+
+  margin:0;
+  padding:0;
+}
+.card .inner img{
+    width:100%;
+}
+#facilities{
+    padding: 30px 0px;
+
+
+}
+#facilities h1{
+    font-weight:900;
+    font-size:34px;
+    padding-bottom:5px;
+}
+.title{
+    text-align:center;
+    padding: 25px 0px;
+}
+.card-body button{
+  border-radius: 50px;
+  margin-right: 15px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 14px 28px 13px 28px;
+  background-color:#a0b4cf;
+  border: none;
+  margin-top: 10px;
+  
+}
+.card-body button:hover{
+  background-color:#A0B4CFC5;
+}
+.card-body button a{
+    text-decoration:none;
+    color:rgba(255, 255, 255, 0.788);
+}
+.card{
+  margin:5px;
+  box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
+    
+}
+.inner{
+    overflow:hidden;
+  }
+  .inner img{
+    transition: all 1.5s ease;
+  }
+  .inner:hover img{
+    transform:scale(1.3);
+  }
+
+</style>
+<div class="container">
+  <div class="title">
+
+   <h1> Nos Produit</h1>
+    
+    </div>
+     <div class="row ">
+        <div class="col-md-10">
+          <div class="row">
+      {%  for produit in produits  %}
+         <div class="col-md-4">
+             <div class=" card text-center">
+               <div class="inner">
+      <img src=" /images/produit/{{ produit.imagename }} " class="card-img-top" alt="..." style="width:100%!important; height:40vh;">
+               </div>
+                <div class="card-body">
+                <h5 class="card-title">{{ produit.nom }}</h5>
+                    <h3 class="card-title"> {{ produit.prix }} FCFA </h3>
+                <p class="card-text" style="color:#120F0BB2; font-weight:700;font-family: 'Poppins', sans-serif;">{{ produit.description |u.truncate(70 ,'...')  }} </p>
+                  <a href=" {{ path('card_add' , {'id': produit.id }) }} " class="btn btn-success btn-sm"><i class="fas fa-shopping-cart" style="margin:5px;"></i>Add to cart</a>&nbsp;&nbsp;<a href="#" class="btn btn-sm btn-dark"><i class="fas fa-plus" style="margin: 5px;"></i>View product</a>
+                </div>
+             </div>
+         </div>
+            {% endfor %}
+              </div>
+     </div>
+   
+</div>
+
+</section>
+
+
+{% endblock %}

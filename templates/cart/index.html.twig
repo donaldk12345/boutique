@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+<style>
+
+</style>
+
+<div class="tb p-3 mt-4" style="">
+  
+   <h1  class="text-center"> Votre panier</h1>
+    </div>
+   {% if items | length > 0  %}
+      <div class="container">
+      <table class="table" border="0">
+          <tr>
+             <th>Nom </th>
+             <th>Photo </th>
+              <th>Prix </th>
+               <th>Quantité </th>
+                <th>Total </th>
+                <th></th>
+           </tr>
+             {% for item in items %}
+              <tr> 
+              <td> {{ item.produit.nom }} </td>
+              <td><img src=" /images/produit/{{ item.produit.imagename}} " style="width:8%; height:8%; border-radius:50%;"></td>
+              <td> {{ item.produit.prix }} </td>
+              <td>  {{  item.quantite }} </td>
+               <td>  {{ item.produit.prix * item.quantite }} </td>
+               <td>  <a href=" {{ path('cart-remove' , { 'id': item.produit.id } ) }} " class=" btn btn-danger btn-sm" style="display:inline-block;">delete</a></td>
+              </tr>
+             {% endfor %}
+                    <tr>  
+                      <td colspan="3" class="text-right"> Total: </td>
+                       <td> {{ total }} </td>
+                        <td> <td>
+                    
+                    </tr>
+               
+       </table>
+        <div class="text-center">
+        <a href=" {{ path('checkout') }} " class="btn btn-secondary btn-sm mt-4 ">Proceder aux paiement  </a>
+        </div>
+       </div>
+
+{%  else %}
+  <p ><h5 class="text-center mt-3" style="color:#fe4066; ">panier est vide</h5> </p>
+  {% endif %}
+{% endblock %}
