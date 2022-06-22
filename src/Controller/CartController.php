@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CartController extends AbstractController
 {
@@ -79,6 +80,23 @@ class CartController extends AbstractController
     return $this->render('cart/checkout.html.twig',[
            
             'form' => $form->createView(),
+        ]);
+
+    }
+
+    /**
+     * 
+     * @Route("/payement", name="payement")
+     */
+    public function payementCart(ShoppingCart $shoppingCart){
+
+        $details=$shoppingCart->getDetailCartItems();
+       
+        $total=$shoppingCart->getTotal();
+        return $this->render('cart/payement.html.twig',[
+            'items' => $details,
+            'total' => $total
+
         ]);
 
     }

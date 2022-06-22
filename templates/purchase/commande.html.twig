@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<div class="container">
+<h3 class="my-3 text-center">Mes commandes :
+	</h3>
+	{% if purchases | length > 0 %}
+		<table class="table" border="0" style=" box-shadow: 0 3px 9px 3px rgb(0 0 0 / 1%);">
+			
+				<tr style="background-color:var(--salmon-pink); color:#fff;">
+					<th>Numéro</th>
+					<th>Adresse</th>
+					<th>Date de commande</th>
+					<th>Produits</th>
+					<th>Total</th>
+				</tr>
+		
+		
+				{% for purchase in purchases %}
+					<tr>
+						<td>{{ purchase.id }}</td>
+						<td>{{ purchase.address }}<br>{{purchase.codePostal}},
+							{{purchase.city}}</td>
+						<td>{{ purchase.createdAt | date('d/m/Y H:i') }}</td>
+						<td>
+							<ul type="square" class="list-group-item-action">
+								{% for item in purchase.purchaseCart %}
+									<li style="">{{item.quantiteProduit}}x
+										{{ item.nomProduit }}
+										{{ item.total }}</li>
+								{% endfor %}
+							</ul>
+						</td>
+						<td>{{ purchase.total }}</td>
+					</tr>
+				{% endfor %}
+			
+		</table>
+	{% else %}
+		<div class="alert alert-info mt-3">
+			<h5>Vous n'avez pas encore fait de commande 😥 !</h5>
+		</div>
+	{% endif %}
+
+    </div>
+{% endblock %}

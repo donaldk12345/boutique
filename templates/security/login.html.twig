@@ -5,7 +5,7 @@
      <style>
          
 body{
-    background-color:#F3F4F6;
+    background-color:#f3f4f61c;
 }
 form-control:focus {
     color: #36434d!important;
@@ -20,11 +20,11 @@ form-control:focus {
     opacity: 1; }
 
 a{
-    color:#90b1df;
+    color:var(--salmon-pink);
     text-decoration:none;
 }
 a:hover{
-     color:#90b1df;
+     color:var(--salmon-pink);
 }
 
 @charset "UTF-8";
@@ -98,18 +98,18 @@ a:hover{
     box-shadow: 0 2px 6px 0 rgb(67 89 113 / 12%);
 }       
 </style>
-   <div class="container-xxl">
+   <div class="container-xxl mt-5" >
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
           <!-- Register -->
-          <div class="card">
+          <div class="card mt-5">
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center text-center">
                 <a href="{{  path('home') }}" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                    
-                     <img src="" style="height:70px; width:70px;" />
+                     <img src="{{ asset('images/shopping-bag-icon.png')}}" style="height:70px; width:70px;" />
                   </span>
                   <span class="app-brand-text demo text-body fw-bolder"></span>
                 </a>
@@ -165,19 +165,12 @@ a:hover{
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="connec d-grid w-100" type="submit">Login</button>
+                  <button class="add-cart-btn d-grid w-100" type="submit">Login</button>
                 </div>
               </form>
 
               <p class="text-center">
-               <span>Se connecter avec Google</span>
-                <a href="  ">
-                  <span><img src="{{('images/google.png')}}" alt="google" class="me-3" style="height:20px;width:20px;" /></span>
-                </a> <br>
-                <span>Nouveau sur le site ?</span>
-                <a href="{{ path('security_registration')}}">
-                  <span>Créer un compte</span>
-                </a>
+              
               </p>
             </div>
           </div>
