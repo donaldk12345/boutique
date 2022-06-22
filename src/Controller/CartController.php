@@ -10,8 +10,9 @@ use App\Services\Panier\SessionService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CartController extends AbstractController
 {
@@ -70,6 +71,7 @@ class CartController extends AbstractController
     /**
      * 
      * @Route("/checkout", name="checkout")
+     * @Security("is_granted('ROLE_USER')") 
      */
     public function checkoutShop(Request $request){
         $form = $this->createForm(PurchaseFormType::class);
@@ -87,6 +89,7 @@ class CartController extends AbstractController
     /**
      * 
      * @Route("/payement", name="payement")
+     * @Security("is_granted('ROLE_USER')") 
      */
     public function payementCart(ShoppingCart $shoppingCart){
 
