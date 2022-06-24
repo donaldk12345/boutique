@@ -69,9 +69,7 @@ class PurchaseController extends AbstractController
        }
 
         $entityManagerInterface->flush();
-        return $this->redirectToRoute('payement', [
-            'id' => $purchase->getId()
-        ]); 
+        return $this->redirectToRoute('payement'); 
         
     }
     

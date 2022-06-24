@@ -27,6 +27,7 @@ class CartController extends AbstractController
        $details=$shoppingCart->getDetailCartItems();
        
        $total=$shoppingCart->getTotal();
+      
      
        
         return $this->render('cart/index.html.twig',[
@@ -96,9 +97,11 @@ class CartController extends AbstractController
         $details=$shoppingCart->getDetailCartItems();
        
         $total=$shoppingCart->getTotal();
+
+       
         return $this->render('cart/payement.html.twig',[
             'items' => $details,
-            'total' => $total
+            'total' => json_encode($total)
 
         ]);
 

@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        
        
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -12,6 +13,7 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+             <script src="https://www.paypal.com/sdk/js?client-id=AbtNAcK_6NtxmMNZIu_x4Uujl2ef-85RqToVByFpN8jnq4k7NoZ-7tilvjpGfNS-aB8jKHP0XYeZptQE&currency=USD"></script>
         {% endblock %}
     </head>
     <body>

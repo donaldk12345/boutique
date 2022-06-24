@@ -22,14 +22,7 @@ body{
 }
 </style>
     <div class="container mt-4">
-    
-    <div class="col-md-4 m-auto">
-        <div class="row">
-            <form action="" method="POST" class="text-center">
-                <input alt="Check out with PayPal" name="submit_red" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" type="image">
-            </form>
-        </div>
-    </div>
+
     <div class="col-md-4 mt-2 m-auto">
         <h4 class="mb-3 text-center">
             <span class="text-muted text-center" style="font-size:18px!important;">Votre panier ! cliqué sur le boutton pour payé !</span>
@@ -50,6 +43,39 @@ body{
                 <strong>  {{ total }} </strong>
             </li>
         </ul>
+    </div>
+     <div class="col-md-4 m-auto">
+        <div class="row">
+    <!-- Set up a container element for the button -->
+    <div id="paypal-button-container"></div>
+    <script>
+      paypal.Buttons({
+        // Sets up the transaction when a payment button is clicked
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value:  {{ total|raw  }} // Can also reference a variable or function
+              }
+            }]
+          });
+        },
+        // Finalize the transaction after payer approval
+        onApprove: (data, actions) => {
+          return actions.order.capture().then(function(orderData) {
+            // Successful capture! For dev/demo purposes:
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+            const transaction = orderData.purchase_units[0].payments.captures[0];
+            alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+            // When ready to go live, remove the alert and show a success message within this page. For example:
+            // const element = document.getElementById('paypal-button-container');
+            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            // Or go to another URL:  actions.redirect('thank_you.html');
+          });
+        }
+      }).render('#paypal-button-container');
+    </script>
+        </div>
     </div>
 </div>
      
