@@ -25,7 +25,7 @@ class HomeController extends AbstractController
 
     /**
      * 
-     * @Route("/boutique", name="boutique")
+     * @Route("/boutiques", name="boutiques")
      */
     public function insertProduit(Request $request, EntityManagerInterface $manager): Response
     {

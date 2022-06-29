@@ -3,18 +3,21 @@
 namespace App\Entity;
 
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * 
  * @Vich\Uploadable
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  * 
  */
 class Produit
@@ -53,6 +56,10 @@ class Produit
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
+      /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
      /**
      * 
      * 
@@ -72,9 +79,33 @@ class Produit
      */
     private $purchaseCarts;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $promo;
+
     public function __construct()
     {
         $this->purchaseCarts = new ArrayCollection();
+    }
+
+      /**
+     * 
+     * @ORM\PrePersist
+     * @ORM\PreUpdate 
+     * @return void 
+     */
+    public function initializeSlug(){
+        if(empty($this->slug)){
+            $slugify= new Slugify();
+            $this->slug =$slugify->slugify($this->nom);
+        }
     }
 
     public function getId(): ?int
@@ -212,6 +243,50 @@ class Produit
                 $purchaseCart->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function isPromo(): ?bool
+    {
+        return $this->promo;
+    }
+
+    public function setPromo(?bool $promo): self
+    {
+        $this->promo = $promo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
 
         return $this;
     }

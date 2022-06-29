@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Filtre;
 use App\Entity\Produit;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Produit>
@@ -16,9 +19,16 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProduitRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * 
+     *@var PaginatorInterface
+     */
+    private $paginator;
+    public function __construct(ManagerRegistry $registry,PaginatorInterface $paginator)
     {
+
         parent::__construct($registry, Produit::class);
+        $this->paginator=$paginator;
     }
 
     public function add(Produit $entity, bool $flush = false): void
@@ -63,4 +73,41 @@ class ProduitRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+/**
+ * 
+ *@return PaginationInterface
+ */
+public function findWithFiltre(Filtre $filtre): PaginationInterface
+{
+    $query= $this->createQueryBuilder('p')->select('c','p')->join('p.category','c');
+
+    if(!empty($filtre->categories)){
+        $query = $query->andWhere('c.id IN (:categories)')->setParameter('categories',$filtre->categories);
+    }
+
+    if(!empty($filtre->val)){            
+        $query = $query->orWhere('p.nom LIKE :val OR p.description LIKE :val')->setParameter('val',"%{$filtre->val}%");
+    }
+
+    if(!empty($filtre->prixMin)){
+        $query=$query->andWhere('p.prix >= :prixMin')->setParameter('prixMin', $filtre->prixMin);
+    }
+    if(!empty($filtre->prixMax)){
+        $query=$query->andWhere('p.prix <= :prixMax')->setParameter('prixMax', $filtre->prixMax);
+    }
+    if(!empty($filtre->promo)){
+        $query=$query->andWhere('p.promo=true');
+    }
+
+     $query= $query->getQuery();
+     return $this->paginator->paginate(
+        $query,
+        $filtre->page,
+        8
+     );
+
+   
+}
+
 }

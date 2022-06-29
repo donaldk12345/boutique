@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BoutiqueController!{% endblock %}
+
+{% block body %}
+<style>
+   .filter{
+     display:block;
+     position: sticky;
+     top:20px;
+   
+    
+}
+.form-control{
+    margin-top:10px!important;
+}
+.form-check-label{
+  font-size:16px!important;
+  text-transform:lowercase!important;
+}
+.but button {
+    margin-right: 15px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 28px 13px 28px;
+    background-color: #fff;
+    border: solid 1px #fff;
+    color: rgba(17, 17, 17, 0.705);
+}
+
+.but button a {
+    color: rgba(17, 17, 17, 0.705);
+}
+
+.but button:hover {
+    background-color: transparent;
+    border: solid 1px #fff;
+    color: #fff;
+    transition: 0.5s;
+}
+.but{
+  justify-content:center;
+  text-align:center;
+  display:flex;
+}
+
+.but button a:hover {
+    color: #fff;
+}
+.pagina{
+  margin-left:15px;
+  margin-bottom:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.page-item.active .page-link{
+  background-color:hsl(353, 100%, 78%)!important;
+  border:none;
+  color:#fff!important;
+}
+.page-link{
+  color:hsl(0, 0%, 27%)!important;
+  outline:none!important;
+}
+</style>
+ <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/blog-1.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
+        <div class="container">
+            <div class="col-sm">
+             <br>
+            <br>
+                <h1 class="text-center  p-3" style="color: rgba(255, 255, 255, 0.89); text-transform: uppercase;font-family: 'Poppins', sans-serif;">New Arrival !</h1>
+
+            </div>
+            <div class="text-center">
+                <p style="color:rgba(255,255,255,0.71);font-family: 'Poppins', sans-serif;">Découvrez des maintenant les meilleurs produits de vos réves à un bas prix  </p><br>
+                
+                <div class="but"><button> <a href="" class="text-center">Shop Now </a></button></div>
+            </div>
+
+
+        </div>
+   </div>
+   
+ <div class="container pt-4">
+     <div class="row">
+          <div class="col-md category pt-2  pb-2">
+    
+            {{ form_start(form, {attr: {class: 'filter '}})  }}
+         <h5 class="text-secondary text-small"> Filtre des produits</h5>
+         
+           {{ form_widget(form) }}
+          <button type="submit" class="add-cart-btn mt-4 col-md">Filtrè</button>
+            {{ form_end(form) }}
+
+         
+            </div>
+
+      
+         <div class="col-md-10">
+          <div class="row mt-4">
+           
+            
+          <div class="product-main">
+
+            <h2 class=" text-center text-uppercase py-2 fw-bold text-secondary mt-3">Bienvenue dans la boutique</h2>
+
+            <div class="product-grid mt-2">
+
+             {% for produit in produits %}
+              <div class="showcase pb-2">
+              
+                <div class="showcase-banner">
+                  <img src="/images/produit/{{ produit.imagename }} " alt="Black Floral Wrap Midi Skirt" class="product-img default"
+                    width="300" style="width:100%!important; height:40vh!important;">
+                    {% if produit.promo %}
+                         <p class="showcase-badge angle pink text-center">En promotion !</p>
+                    {% endif %}
+                  
+                </div>
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">{{ produit.nom }}</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">{{ produit.description |u.truncate(30 ,'...')  }}</a>
+                  </h3>
+                <h5 class=" text showcase-title text-warning" style="color:;"> {{ produit.category.nom }}</h5>
+                  
+                  <div class="price-box">
+                    <p class="price"> {{ produit.prix }}&nbsp;FCFA</p>
+                    
+                  </div>
+                  <div class="">
+                  <a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn "><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart</a>
+                  </div>
+              
+                </div>
+              
+              </div>
+                  {% endfor %}
+
+      
+
+            </div>
+
+          </div>
+           
+        </div>
+         <div class="pagina mt-2">
+          <div class="pagination">
+          {{ knp_pagination_render(produits) }}
+              </div>
+     </div>
+         </div>
+   </div>
+
+
+ </div>
+{% endblock %}

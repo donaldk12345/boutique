@@ -80,29 +80,54 @@
     </header>
     <!-- end of header -->
 <div class="container">
-  <div class="title">
-
-   <h1> Nos Produit</h1>
-    
-    </div>
+ 
      <div class="row">
         <div class="col-md-10 m-auto">
           <div class="row">
-      {%  for produit in produits  %}
-         <div class="col-md-4">
-             <div class=" card text-center">
-               <div class="inner">
-      <img src=" /images/produit/{{ produit.imagename }} " class="card-img-top" alt="..." style="width:100%!important; height:40vh;">
-               </div>
-                <div class="card-body">
-                <h5 class="card-title">{{ produit.nom }}</h5>
-                    <h3 class="card-title"> {{ produit.prix }} FCFA </h3>
-                <p class="card-text" style="color:#120F0BB2; font-weight:700;font-family: 'Poppins', sans-serif;">{{ produit.description |u.truncate(70 ,'...')  }} </p>
-                  <a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn"><i class="fas fa-shopping-cart" style="margin:5px;"></i>Add to cart</a>
+                  <div class="product-main">
+
+            <h2 class="title">Nos meilleur produits</h2>
+
+            <div class="product-grid">
+
+             {% for produit in produits %}
+              <div class="showcase pb-2">
+              
+                <div class="showcase-banner">
+                  <img src="/images/produit/{{ produit.imagename }} " alt="Black Floral Wrap Midi Skirt" class="product-img default"
+                    width="300" style="width:100%!important; height:40vh!important;">
+                    {% if produit.promo %}
+                         <p class="showcase-badge angle pink text-center">En promotion !</p>
+                    {% endif %}
+                  
                 </div>
-             </div>
-         </div>
-            {% endfor %}
+              
+                <div class="showcase-content">
+                  <a href="#" class="showcase-category">{{ produit.nom }}</a>
+              
+                  <h3>
+                    <a href="#" class="showcase-title">{{ produit.description |u.truncate(30 ,'...')  }}</a>
+                  </h3>
+                <h5 class=" text showcase-title text-warning" style="color:;"> {{ produit.category.nom }}</h5>
+                  
+                  <div class="price-box">
+                    <p class="price"> {{ produit.prix }}&nbsp;FCFA</p>
+                    
+                  </div>
+                  <div class="">
+                  <a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn "><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart</a>
+                  </div>
+              
+                </div>
+              
+              </div>
+                  {% endfor %}
+
+      
+
+            </div>
+
+          </div>
               </div>
      </div>
    
