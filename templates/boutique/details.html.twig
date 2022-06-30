@@ -1,0 +1,195 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BoutiqueController!{% endblock %}
+
+{% block body %}
+<style>
+   .filter{
+     display:block;
+     position: sticky;
+     top:20px;
+   
+    
+}
+.form-control{
+    margin-top:10px!important;
+}
+.form-check-label{
+  font-size:16px!important;
+  text-transform:lowercase!important;
+}
+.but button {
+    margin-right: 15px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 28px 13px 28px;
+    background-color: #fff;
+    border: solid 1px #fff;
+    color: rgba(17, 17, 17, 0.705);
+}
+
+.but button a {
+    color: rgba(17, 17, 17, 0.705);
+}
+
+.but button:hover {
+    background-color: transparent;
+    border: solid 1px #fff;
+    color: #fff;
+    transition: 0.5s;
+}
+.but{
+  justify-content:center;
+  text-align:center;
+  display:flex;
+}
+
+.but button a:hover {
+    color: #fff;
+}
+.pagina{
+  margin-left:15px;
+  margin-bottom:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.page-item.active .page-link{
+  background-color:hsl(353, 100%, 78%)!important;
+  border:none;
+  color:#fff!important;
+}
+.page-link{
+  color:hsl(0, 0%, 27%)!important;
+  outline:none!important;
+}
+</style>
+ <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/blog-1.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
+        <div class="container">
+            <div class="col-sm">
+             <br>
+            <br>
+                <h1 class="text-center  p-3" style="color: rgba(255, 255, 255, 0.89); text-transform: uppercase;font-family: 'Poppins', sans-serif;">New Arrival !</h1>
+
+            </div>
+            <div class="text-center">
+                <p style="color:rgba(255,255,255,0.71);font-family: 'Poppins', sans-serif;">Découvrez des maintenant les meilleurs produits de vos réves à un bas prix  </p><br>
+                
+                <div class="but"><button> <a href="" class="text-center">Shop Now </a></button></div>
+            </div>
+
+
+        </div>
+   </div>
+   
+ <div class="container pt-4">
+     <div class="row">
+          <div class="col-md category pt-2  pb-2">
+    
+              autres
+            </div>
+
+      
+         <div class="col-md-10">
+          <div class="row mt-4">
+           
+            
+              <div class="product-featured">
+
+            <h2 class="title">Details du produit</h2>
+
+            <div class="showcase-wrapper has-scrollbar">
+
+              <div class="showcase-container">
+
+                <div class="showcase">
+                  
+                  <div class="showcase-banner">
+                    <img src="/images/produit/{{ produits.imagename }}" alt="shampoo, conditioner & facewash packs" class="showcase-img">
+                  </div>
+
+                  <div class="showcase-content">
+                    
+                    <a href="#">
+                      <h3 class="showcase-title">{{ produits.nom }}</h3>
+                    </a>
+
+                    <p class="showcase-desc">
+                      {{ produits.description  }}
+                    </p>
+
+                    <div class="price-box">
+                      <p class="price">{{ produits.prix }}&nbsp;FCFA</p>
+
+                     
+                    </div>
+
+                    <button class="add-cart-btn"><a  href="{{ path('card_add' , {'id': produits.id }) }} " >add to cart</a></button>
+
+                    <div class="showcase-status">
+                      <div class="wrapper">
+                        <p>
+                          already sold: <b>20</b>
+                        </p>
+
+                        <p>
+                          available: <b>40</b>
+                        </p>
+                      </div>
+
+                      <div class="showcase-status-bar"></div>
+                    </div>
+
+                    <div class="countdown-box">
+
+                      <p class="countdown-desc">
+                        Hurry Up! Offer ends in:
+                      </p>
+
+                      <div class="countdown">
+
+                        <div class="countdown-content">
+
+                          <p class="display-number">360</p>
+
+                          <p class="display-text">Days</p>
+
+                        </div>
+
+                        <div class="countdown-content">
+                          <p class="display-number">24</p>
+                          <p class="display-text">Hours</p>
+                        </div>
+
+                        <div class="countdown-content">
+                          <p class="display-number">59</p>
+                          <p class="display-text">Min</p>
+                        </div>
+
+                        <div class="countdown-content">
+                          <p class="display-number">00</p>
+                          <p class="display-text">Sec</p>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+           
+        </div>
+         </div>
+   </div>
+
+
+ </div>
+{% endblock %}

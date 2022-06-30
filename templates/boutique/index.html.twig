@@ -121,10 +121,10 @@
                 </div>
               
                 <div class="showcase-content">
-                  <a href="#" class="showcase-category">{{ produit.nom }}</a>
+                  <a href="{{ path('details' , {'slug': produit.slug }  )}}" class="showcase-category">{{ produit.nom }}</a>
               
                   <h3>
-                    <a href="#" class="showcase-title">{{ produit.description |u.truncate(30 ,'...')  }}</a>
+                    <a href="{{ path('details' , {'slug': produit.slug }  )}}" class="showcase-title">{{ produit.description |u.truncate(30 ,'...')  }}</a>
                   </h3>
                 <h5 class=" text showcase-title text-warning" style="color:;"> {{ produit.category.nom }}</h5>
                   
@@ -133,7 +133,7 @@
                     
                   </div>
                   <div class="">
-                  <a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn "><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart</a>
+                  <button><a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn "><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart</a></button>
                   </div>
               
                 </div>

@@ -35,4 +35,30 @@ class BoutiqueController extends AbstractController
         ]);
     }
 
+     /**
+      * @Route("/details/{slug}",name="details")
+      * @param Produit $produit
+      * @return Response
+      * 
+      */
+      public function view(ProduitRepository $produitRepository,$slug){
+        $produits=$produitRepository->findOneBy(['slug'=> $slug]);
+      
+     
+        $produits=$produitRepository->findOneBySlug($slug);
+  
+        if (!$produits) {
+            throw $this->createNotFoundException(
+                'La video  demandé n\'existe pas !'.$slug
+            );
+        }
+       
+        return $this->render('boutique/details.html.twig', [
+          'produits' => $produits
+                
+      ]);
+  
+      }
+  
+
 }
