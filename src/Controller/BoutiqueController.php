@@ -54,7 +54,8 @@ class BoutiqueController extends AbstractController
         }
        
         return $this->render('boutique/details.html.twig', [
-          'produits' => $produits
+          'produits' => $produits,
+          'promos' =>$produitRepository->findByMin()
                 
       ]);
   

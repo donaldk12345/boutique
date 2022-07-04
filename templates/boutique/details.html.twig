@@ -212,8 +212,12 @@
   color:hsl(0, 0%, 27%)!important;
   outline:none!important;
 }
+.card{
+   border: 1px solid var(--cultured)!important;
+  border-radius: var(--border-radius-md)!important;
+}
 </style>
- <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/blog-1.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
+ <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/blog-2.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
         <div class="container">
             <div class="col-sm">
              <br>
@@ -233,19 +237,37 @@
    
  <div class="container pt-4">
      <div class="row">
-          <div class="col-md category pt-2  pb-2">
-    
-              autres
+          <div class="col-md category pt-2  pb-2 m-auto">
+               <h5 class="text-muted  mt-3 text-capitalize text-uppercase">Produits en promotion !</h5>
+              <div class="row mb-5">
+                <div class="col-md">
+                  {% for promo in promos %}
+                  <div class="card mb-3">
+                    <div class="row g-0">
+                      <div class="col-md">
+                        <img class="card-img card-img-left" src="/images/produit/{{ promo.imagename }}"  style="height:20vh!important"  alt="Card image"/>
+                      </div>
+                      <div class="col-md">
+                        <div class="card-body">
+                         <a href="{{ path('details' , {'slug': promo.slug }  )}}" class="text-decoration-none text-muted text-small" style="color:hsl(353, 100%, 78%)!important;" >{{ promo.nom }}</a>
+                          <p class="card-text"><small class="text-muted"> {{ promo.prix }}  &nbsp;FCFA</small></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                      {% endfor %}
+                </div>
+              </div>
             </div>
 
       
-         <div class="col-md-10">
+         <div class="col-md-9">
           <div class="row mt-4">
            
             
               <div class="product-featured">
 
-            <h2 class="title">Details du produit</h2>
+            <h2 class=" text-uppercase text-muted text-opacity-75 text-center mt-2 " style="font-size:26px!important;">Details du produit</h2>
 
             <div class="showcase-wrapper has-scrollbar">
 
@@ -282,7 +304,7 @@
                         </p>
 
                         <p>
-                          available: <b>40</b>
+                          Disponible: <b> {{ produits.quantite }} </b>
                         </p>
                       </div>
 
