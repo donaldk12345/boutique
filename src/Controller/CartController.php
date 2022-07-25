@@ -38,6 +38,16 @@ class CartController extends AbstractController
     }
 
     /**
+     *@Route("/cart-count-read", name="cart-count-read")
+     */
+    public function cartIndex(ShoppingCart $shoppingCart){
+        return new JsonResponse([
+            'count' => $shoppingCart->getDetailCartItems()
+        ]);
+       
+    }
+
+    /**
      * 
      * @Route("/panier/add/{id}" , name= "card_add")
      */

@@ -4,6 +4,9 @@
 
 {% block body %}
 <style>
+body{
+  background-color:var(--body-color)!important;
+}
 .card .inner img{
     width:100%;
 }
@@ -54,31 +57,55 @@
   .inner:hover img{
     transform:scale(1.3);
   }
+  .but button {
+    margin-right: 15px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 28px 13px 28px;
+    background-color: #fff;
+    border: solid 1px #fff;
+    color: rgba(17, 17, 17, 0.705);
+}
+
+.but button a {
+    color: rgba(17, 17, 17, 0.705);
+}
+
+.but button:hover {
+    background-color: transparent;
+    border: solid 1px #fff;
+    color: #fff;
+    transition: 0.5s;
+}
+.but{
+  justify-content:center;
+  text-align:center;
+  display:flex;
+}
+
+.but button a:hover {
+    color: #fff;
+}
 
 </style>
-    <!-- header -->
-    <header id = "header" class = "vh-100 carousel slide" data-bs-ride = "carousel" style = "padding-top: 104px;">
-        <div class = "container h-100 d-flex align-items-center carousel-inner">
-            <div class = "text-center carousel-item active">
-                <h2 class = "text-capitalize text-white">best collection</h2>
-                <h1 class = "text-uppercase py-2 fw-bold text-white">new arrivals</h1>
-                <a href = "#" class = "btn mt-3 text-uppercase">shop now</a>
-            </div>
-            <div class = "text-center carousel-item">
-                <h2 class = "text-capitalize text-white">best price & offer</h2>
-                <h1 class = "text-uppercase py-2 fw-bold text-white">new season</h1>
-                <a href = "#" class = "btn mt-3 text-uppercase">buy now</a>
-            </div>
-        </div>
+   <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/banner-3.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
+        <div class="container">
+            <div class="col-sm">
+             <br>
+            <br>
+                <h4 class="text-center  p-3" style="color: rgba(255, 255, 255, 0.89); text-transform: uppercase;font-family: 'Poppins', sans-serif;">Bienvenue sur le meilleur site de e-commerce !</h4>
 
-        <button class = "carousel-control-prev" type = "button" data-bs-target="#header" data-bs-slide = "prev">
-            <span class = "carousel-control-prev-icon"></span>
-        </button>
-        <button class = "carousel-control-next" type = "button" data-bs-target="#header" data-bs-slide = "next">
-            <span class = "carousel-control-next-icon"></span>
-        </button>
-    </header>
-    <!-- end of header -->
+            </div>
+            <div class="text-center">
+                <p style="color:rgba(255,255,255,0.71);font-family: 'Poppins', sans-serif;">Découvrez des maintenant les meilleurs produits de vos réves à un bas prix  </p><br>
+                
+                <div class="but"><button> <a href="" class="text-center">Super promo ! </a></button></div>
+            </div>
+
+
+        </div>
+   </div>
 <div class="container">
  
      <div class="row">

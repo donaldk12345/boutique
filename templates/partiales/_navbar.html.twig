@@ -9,7 +9,9 @@
             <div class = "order-lg-2 nav-btns">
                 <button type = "button" class = "btn position-relative">
                    
-                     <a href="{{ path('cart_index') }}" class="text-muted text-decoration-none" style="cursor:pointer!important;">Panier&nbsp; <i class = "fa fa-shopping-cart"></i> </a>
+                     <a href="{{ path('cart_index') }}" class="text-muted text-decoration-none" style="cursor:pointer!important;">Panier&nbsp; <i class = "fa fa-shopping-cart"></i>
+                      <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary">{{ items|length}} </span>
+                      </a>
                 </button>
               &nbsp;&nbsp;
                 <button type = "button" class = "btn position-relative">

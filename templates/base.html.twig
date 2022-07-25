@@ -16,10 +16,89 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
              <script src="https://www.paypal.com/sdk/js?client-id=AbtNAcK_6NtxmMNZIu_x4Uujl2ef-85RqToVByFpN8jnq4k7NoZ-7tilvjpGfNS-aB8jKHP0XYeZptQE&currency=USD"></script>
+
+             <script>
+
+                function cartCount(){
+                   
+                         fetch(
+                            ' {{ path('cart-count-read')}} ',
+                             {'credentials': 'include'}
+                         ).then(function(response){
+                            response.json().then(function(json){
+
+                             
+                                data=document.getElementById('cart-count').innerHTML=json.count;
+                                //setTimeout(cartCount,5000);
+                                console.log(data);
+                            });
+                         }).catch(function(reason){
+
+                         });
+                }
+                cartCount();
+             </script>
         {% endblock %}
     </head>
     <body>
-    {% include "partiales/_navbar.html.twig" %}
+       <!-- navbar -->
+    <nav class = "navbar navbar-expand-lg navbar-light bg-white py-1 ">
+        <div class = "container">
+            <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = " {{ path('home') }} ">
+                <img src = "{{ asset('images/ynoshop1.png')}}" alt = "site icon" style="height:47px; width:40px;">
+                <span class = "text-uppercase fw-lighter ms-2">YnoShop</span>
+            </a>
+
+            <div class = "order-lg-2 nav-btns">
+                <button type = "button" class = "btn position-relative">
+                   
+                     <a href="{{ path('cart_index') }}" class="text-muted text-decoration-none" style="cursor:pointer!important;">Panier&nbsp; <i class = "fa fa-shopping-cart"></i>
+                      <span class = "position-absolute top-0 start-100 translate-middle badge bg-primary" id="cart-count">0</span>
+                      </a>
+                </button>
+              &nbsp;&nbsp;
+                <button type = "button" class = "btn position-relative">
+                    <i class = "fa fa-search"></i>
+                </button>
+            </div>
+
+            <button class = "navbar-toggler border-0" type = "button" data-bs-toggle = "collapse" data-bs-target = "#navMenu">
+                <span class = "navbar-toggler-icon"></span>
+            </button>
+
+            <div class = "collapse navbar-collapse order-lg-1" id = "navMenu">
+                <ul class = "navbar-nav mx-auto text-center">
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link  text-dark" href = " {{ path('home') }}">Accueil</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link  text-dark" href = "{{ path('boutique') }} ">Boutique</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link  text-dark" href = "#special">Nouveautés</a>
+                    </li>
+                    {% if not app.user %}
+                        
+                  
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link  text-dark" href = " {{ path('security_registration') }} ">Inscription</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2 border-0">
+                        <a class = "nav-link text-dark" href = " {{  path('security_login') }} ">Connexion</a>
+                    </li>
+                    {% else %}
+                      <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link  text-dark" href = " {{ path('app_commande') }} ">commandes</a>
+                    </li>
+                       <li class = "nav-item px-2 py-2 border-0">
+                        <a class = "nav-link text-dark" href = " {{  path('security_logout') }} ">Déconnexion</a>
+                    </li>
+                      {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end of navbar -->
         {% block body %}{% endblock %}
         {% include "partiales/_footer.html.twig" %}
     </body>
