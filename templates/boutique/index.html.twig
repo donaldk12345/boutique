@@ -56,7 +56,7 @@
   align-items:center;
 }
 .page-item.active .page-link{
-  background-color:hsl(353, 100%, 78%)!important;
+  background-color:var(--salmon-pink)!important;
   border:none;
   color:#fff!important;
 }
@@ -126,7 +126,7 @@
                   <h3>
                     <a href="{{ path('details' , {'slug': produit.slug }  )}}" class="showcase-title">{{ produit.description |u.truncate(30 ,'...')  }}</a>
                   </h3>
-                <h5 class=" text showcase-title text-warning" style="color:;"> {{ produit.category.nom }}</h5>
+                <h5 class=" text showcase-title  text-secondary text-muted" style="color:;"> {{ produit.category.nom }}</h5>
                   
                   <div class="price-box">
                     <p class="price"> {{ produit.prix }}&nbsp;FCFA</p>

@@ -5,6 +5,34 @@
 {% block body %}
 <style>
 
+.qt, .qt-plus, .qt-minus {
+	display: inline-block;
+	float: left;
+}
+
+.qt {
+	font-size: 19px;
+	line-height: 50px;
+	width: 70px;
+	text-align: center;
+}
+
+.qt-plus, .qt-minus {
+
+	padding: 0 20px;
+
+}
+
+
+.qt-plus {
+	line-height: 50px;
+}
+
+.qt-minus {
+	line-height: 47px;
+}
+
+
 </style>
 
 
@@ -25,9 +53,32 @@
               <td> {{ item.produit.nom }} </td>
               <td><img src=" /images/produit/{{ item.produit.imagename}} " style="width:8%; height:8%; border-radius:50%;"></td>
               <td> {{ item.produit.prix }} </td>
-              <td>  {{  item.quantite }} </td>
+              <td style="padding: 13px 16px!important;"> 
+
+               {% if  item.quantite > 1 %}
+                 <span class="qt-minus">
+                <a href="{{ path("cart_decrement", {'id': item.produit.id}) }}" class="btn btn-sm " style="background-color:hsl(0, 0%, 93%);">
+								<i class="fas fa-minus"></i>
+							  </a> 
+                 </span>
+               {% endif %}
+               &nbsp;
+              <span class="qt text-center">
+              {{  item.quantite }}
+              </span>
+              &nbsp;
+               {% if  item.quantite >=1   %}
+              <span class="qt-plus">
+              <a href="{{ path("card_add", {'id': item.produit.id}) }}?returnToCart=true" class="btn btn-sm" style="background-color:hsl(0, 0%, 93%);">
+								<i class="fas fa-plus"></i>
+							</a>
+                 </span>  
+              {% endif  %}
+           
+              
+              </td>
                <td>  {{ item.produit.prix * item.quantite }} </td>
-               <td>  <a href=" {{ path('cart-remove' , { 'id': item.produit.id } ) }} " class=" btno btn-sm" style="display:inline-block;">delete</a></td>
+               <td>  <a href=" {{ path('cart-remove' , { 'id': item.produit.id } ) }} " class="btn btn-sm btn-out" style="display:inline-block;">delete</a></td>
               </tr>
              {% endfor %}
                     <tr>  
@@ -46,7 +97,11 @@
 {%  else %}
     <div class="container m-auto" style="padding-top: 104px;">
       <div class="col-md-8 m-auto">
-  <p ><h5 class="text-center mt-auto" style="color:#fe4066; ">panier est vide</h5> </p>
+    <div class="alert alert-warning text-center  animate__animated animate__fadeInUp" role="alert">
+                            Votre panier est vide  ! &nbsp;
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+     </div>
     </div>
     </div>
   {% endif %}

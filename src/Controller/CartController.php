@@ -60,7 +60,7 @@ class CartController extends AbstractController
         $cart->addToCart($id);
    
         if ($request->query->get('returnToCart')) {
-            return $this->redirectToRoute("card_add");
+            return $this->redirectToRoute("cart_index");
         }
         return $this->redirectToRoute('cart_index');
 
@@ -115,6 +115,22 @@ class CartController extends AbstractController
 
         ]);
 
+    }
+
+    /**
+     * 
+     *@Route("/cart/decrement/{id}", name="cart_decrement") 
+     */
+    public function decrement($id, ProduitRepository $produitRepository, ShoppingCart $cart){
+
+        $produit=$produitRepository->find($id);
+        if(!$produit){
+            throw $this->createNotFoundException("Le produit n \'existe vous ne pouvez pas supprimer !");
+        }
+
+
+        $cart->decrement($id);
+        return $this->redirectToRoute("cart_index");
     }
 
 }

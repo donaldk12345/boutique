@@ -28,9 +28,18 @@
                             response.json().then(function(json){
 
                              
-                                data=document.getElementById('cart-count').innerHTML=json.count;
+                                //data=document.getElementById('cart-count').innerHTML=json.count;
+
+                               var  data=json.count;
+                               
+                               var item =data.length;
+                                
+
+                                document.getElementById('cart-count').innerHTML=item;
+
+                                
                                 //setTimeout(cartCount,5000);
-                                console.log(data);
+                                //console.log(item);
                             });
                          }).catch(function(reason){
 

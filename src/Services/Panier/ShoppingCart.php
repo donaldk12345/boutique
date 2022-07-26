@@ -91,6 +91,22 @@ class ShoppingCart{
         return $detailedCart;
     }
 
+    public function decrement(int $id)
+    {
+        $cart = $this->getCart();
 
+        if (!array_key_exists($id, $cart)) {
+            return;
+        }
+
+        if( $cart[$id] === 1) {
+            $this->removeToCart($id);
+            return;
+        }
+
+        $cart[$id]--;
+
+        $this->saveCart($cart);
+    }
     
 }
