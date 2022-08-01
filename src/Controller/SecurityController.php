@@ -31,7 +31,7 @@ class SecurityController extends AbstractController
             $user->setRoles(['ROLE_ADMIN']);
           
             $manager->persist($user);
-            
+            //dd($user);
             $manager->flush();
             /*$email =(new Email())
               ->from('fotsoyvesdonald@gmail.com')
