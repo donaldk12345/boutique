@@ -25,7 +25,8 @@
             </tr>
             <tr>
                 <th>ImageName</th>
-                <td>{{ produit.imageName }}</td>
+                <td><img src="/images/produit/{{ produit.imageName }} " alt="Black Floral Wrap Midi Skirt" class="product-img default"
+                     style="width:50px!important; height:50px!important;"></td>
             </tr>
             <tr>
                 <th>CreatedAt</th>
@@ -42,5 +43,10 @@
 
     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
 
-    {{ include('produit/_delete_form.html.twig') }}
+   
+
+
+     {% block javascripts %}
+    <script src="{{ asset('js/produit.js') }}"></script>
+    {% endblock %}
 {% endblock %}

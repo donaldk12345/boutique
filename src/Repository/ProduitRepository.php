@@ -113,7 +113,7 @@ public function findWithFiltre(Filtre $filtre): PaginationInterface
 public function findByMin(){
     return $this->createQueryBuilder('p')
     ->orderBy('p.promo')
-    ->setMaxResults(4)
+    ->setMaxResults(3)
     ->getQuery()
     ->getResult()
     ;

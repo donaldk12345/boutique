@@ -1,46 +1,42 @@
   <!-- footer -->
-    <footer class = "bg-dark py-5">
+    <footer class = "py-5">
         <div class = "container">
             <div class = "row text-white g-4">
                 <div class = "col-md-6 col-lg-3">
-                    <a class = "text-uppercase text-decoration-none brand text-white" href = "index.html">Attire</a>
-                    <p class = "text-white text-muted mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum mollitia quisquam veniam odit cupiditate, ullam aut voluptas velit dolor ipsam?</p>
+                    <h5 class = " text-decoration-none brand text-secondary disable" >Apropos</h5>
+                    <p class = "text-white text-muted mt-3 text">Ynoshop est un site de e-commerce créer par ynodev qui fait dans la vente des accessoires , chaussures et bien d'autres. </p>
                 </div>
 
                 <div class = "col-md-6 col-lg-3">
-                    <h5 class = "fw-light">Links</h5>
+                    <h5 class = "fw-light text-secondary">Liens</h5>
                     <ul class = "list-unstyled">
                         <li class = "my-3">
-                            <a href = "#" class = "text-white text-decoration-none text-muted">
-                                <i class = "fas fa-chevron-right me-1"></i> Home
+                            <a href = " {{ path('home') }} " class = "text-white text-decoration-none text-muted">
+                                <i class = "fas fa-chevron-right me-1"></i> Accueil
                             </a>
                         </li>
                         <li class = "my-3">
-                            <a href = "#" class = "text-white text-decoration-none text-muted">
-                                <i class = "fas fa-chevron-right me-1"></i> Collection
+                            <a href = "  {{ path('boutique') }} " class = "text-white text-decoration-none text-muted">
+                                <i class = "fas fa-chevron-right me-1"></i> Boutique
                             </a>
                         </li>
+                     
                         <li class = "my-3">
                             <a href = "#" class = "text-white text-decoration-none text-muted">
-                                <i class = "fas fa-chevron-right me-1"></i> Blogs
-                            </a>
-                        </li>
-                        <li class = "my-3">
-                            <a href = "#" class = "text-white text-decoration-none text-muted">
-                                <i class = "fas fa-chevron-right me-1"></i> About Us
+                                <i class = "fas fa-chevron-right me-1"></i> Devenir vendeur
                             </a>
                         </li>
                     </ul>
                 </div>
 
                 <div class = "col-md-6 col-lg-3">
-                    <h5 class = "fw-light mb-3">Contact Us</h5>
+                    <h5 class = "fw-light mb-3 text-secondary text-start">Nous contacter</h5>
                     <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
                         <span class = "me-3">
                             <i class = "fas fa-map-marked-alt"></i>
                         </span>
                         <span class = "fw-light">
-                            Albert Street, New York, AS 756, United States of America
+                            Cameroun, Yaoundé, Mendong
                         </span>
                     </div>
                     <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
@@ -48,7 +44,7 @@
                             <i class = "fas fa-envelope"></i>
                         </span>
                         <span class = "fw-light">
-                            attire.support@gmail.com
+                            ynoshop.support@gmail.com
                         </span>
                     </div>
                     <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
@@ -56,13 +52,13 @@
                             <i class = "fas fa-phone-alt"></i>
                         </span>
                         <span class = "fw-light">
-                            +9786 6776 236
+                            +(237) 698839783
                         </span>
                     </div>
                 </div>
 
                 <div class = "col-md-6 col-lg-3">
-                    <h5 class = "fw-light mb-3">Follow Us</h5>
+                    <h5 class = "fw-light mb-3 text-secondary">Nous suivre</h5>
                     <div>
                         <ul class = "list-unstyled d-flex">
                             <li>
@@ -91,4 +87,10 @@
             </div>
         </div>
     </footer>
-    <!-- end of footer -->
+<div class="copyriht">
+   <p> copyriht 2022  by <a href="" onclick="Ynodev()" class="text-bold " style="color:hsl(353deg 100% 78% / 85%);">Ynodev</a></p>
+
+</div>
+{% block javascripts %}
+<script src="{{ asset('js/help.js') }}"></script>
+{% endblock %}

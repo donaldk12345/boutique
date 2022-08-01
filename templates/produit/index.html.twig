@@ -3,34 +3,42 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
-    <h1>Produit index</h1>
 
-    <table class="table">
-        <thead>
+ <div class="container mt-4">
+  <div class="text-center">
+    <h4 class="text-muted">Liste des produits </h4>
+</div>
+    <table class="table mt-2">
+       <tr>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Prix</th>
-                <th>Description</th>
-                <th>ImageName</th>
-                <th>CreatedAt</th>
                 <th>Quantite</th>
-                <th>actions</th>
+                <th>Photo</th>
+                <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
+       
+     
         {% for produit in produits %}
             <tr>
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.nom }}</td>
                 <td>{{ produit.prix }}</td>
-                <td>{{ produit.description }}</td>
-                <td>{{ produit.imageName }}</td>
-                <td>{{ produit.createdAt ? produit.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ produit.quantite }}</td>
-                <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+                 <td>
+                 {% if produit.quantite < 1 %}
+                      0
+                   {% else %}
+                 {{ produit.quantite }}
+                      {% endif %}
+                 </td>
+
+                <td><img src="{{ asset('uploads/images/' ~ produit.imageName) }} " 
+                     style="width:70px!important; height:70px!important;"></td>
+                     
+                <td class="actions">
+                   <a href="{{ path('produit_delete_data', {id: produit.id})}}" data-delete data-token="{{ csrf_token('delete' ~ produit.id )}}" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-sm btn-success bg-success-light">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -38,8 +46,13 @@
                 <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
+      
     </table>
-
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+   <div class="col-md mb-2">
+    <a href="{{ path('new-produits') }}" class="btn btn-sm btn-secondary">Nouveau produit</a>
+     </div>
+     </div>
+    {% block javascripts %}
+    <script src="{{ asset('js/produit.js') }}"></script>
+    {% endblock %}
 {% endblock %}

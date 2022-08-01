@@ -87,6 +87,116 @@ body{
 .but button a:hover {
     color: #fff;
 }
+.list-section {
+  background-color: #f5f5f5;
+  padding-bottom: 80px!important;
+  padding-top:80px!important;
+
+}
+
+
+.list-box {
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+.list-box .content h3 {
+  display: block;
+  line-height: 22px;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.list-box .content p {
+  margin-bottom: 0px;
+  opacity: 0.75;
+}
+
+ .list-box .list-icon .al{
+  display: block;
+  font-size: 30px;
+  margin-right: 15px;
+  color: var(--salmon-pink);
+  width: 65px;
+  height: 65px;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 999px;
+}
+.section-title h3 {
+  font-size: 40px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title h3:after {
+  position: absolute;
+  content: '';
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 50px;
+  height: 2px;
+  background-color:  color: var(--salmon-pink);;
+  margin: 0 auto;
+}
+.orange-text{
+   color: var(--salmon-pink);
+}
+
+.section-title p {
+  font-size: 15px;
+ 
+  margin: 0 auto;
+  color: #555;
+  margin-top: 10px;
+  line-height: 1.8;
+}
+
+.section-title {
+  margin-bottom: 80px;
+}
+.product-section{
+  padding-bottom:100px!important;
+  margin-top:100px!important;
+
+}
+.card-body button{
+  border-radius: 50px;
+  margin-right: 15px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 14px 28px 13px 28px;
+  background-color:#F8F8F8F8;
+  border: none;
+  margin-top: 10px;
+
+
+  
+}
+.card-body button:hover{
+  background-color:#efefefec;
+}
+.card-body button a{
+    text-decoration:none;
+      color:#636a74e0;
+}
+.card{
+  margin:5px;
+  box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
+    
+}
+.inner{
+    overflow:hidden;
+  }
+  .inner img{
+    transition: all 1.5s ease;
+  }
+  .inner:hover img{
+    transform:scale(1.3);
+  }
+
 
 </style>
    <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/banner-3.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
@@ -106,61 +216,88 @@ body{
 
         </div>
    </div>
-<div class="container">
- 
-     <div class="row">
-        <div class="col-md-10 m-auto">
-          <div class="row">
-                  <div class="product-main">
 
-            <h2 class="title">Nos meilleur produits  promo</h2>
+   <div class="list-section ">
+		<div class="container ">
 
-            <div class="product-grid">
+			<div class="row m-auto">
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center m-auto">
+						<div class="list-icon">
+							<i class="fas fa-shipping-fast al"></i>
+						</div>
+						<div class="content">
+							<h3>Livraison gratuit</h3>
+							<p>A partir d'un achat de 50000 XAF</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+					<div class="list-box d-flex align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-phone-volume al"></i>
+						</div>
+						<div class="content">
+							<h3>24/7 Disponible</h3>
+							<p>Appeler nous aujourd'hui</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="list-box d-flex justify-content-start align-items-center">
+						<div class="list-icon">
+							<i class="fas fa-sync al"></i>
+						</div>
+						<div class="content">
+							<h3>Nouveautés</h3>
+							<p>Chaque trois jours !</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
+		</div>
+	</div>
+  <div class="product-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="section-title text">	
+						<h3><span class="orange-text">Nos</span> Produits</h3>
+						<p class="text">Ynoshop vous presente quelques produits nouvellement ajouter , render vous dans la boutique pour voir plus.</p>
+					</div>
+				</div>
+			</div>
+    <div class="col-md-10 mt-2 m-auto">
+			<div class="row justify-content-center">
+		    
              {% for produit in produits %}
-              <div class="showcase pb-2">
-              
-                <div class="showcase-banner">
-                  <img src="/images/produit/{{ produit.imagename }} " alt="Black Floral Wrap Midi Skirt" class="product-img default"
-                    width="300" style="width:100%!important; height:40vh!important;">
-                    {% if produit.promo %}
-                         <p class="showcase-badge angle pink text-center">En promotion !</p>
-                    {% endif %}
-                  
-                </div>
-              
-                <div class="showcase-content">
-                  <a href="#" class="showcase-category">{{ produit.nom }}</a>
-              
-                  <h3>
-                    <a href="#" class="showcase-title">{{ produit.description |u.truncate(30 ,'...')  }}</a>
-                  </h3>
-                <h5 class=" text showcase-title  text-muted" style="color:;"> {{ produit.category.nom }}</h5>
-                  
-                  <div class="price-box">
-                    <p class="price"> {{ produit.prix }}&nbsp;FCFA</p>
+              <div class="col-md-4">
+             <div class=" card text-center">
+               <div class="inner">
+              <a href="{{ path('details' , {'slug': produit.slug }  )}}">  <img src="{{ asset('uploads/images/' ~ produit.imageName) }}" style="width:100%; height:190px;"></a>
+               </div>
+                <div class="card-body">
+                <h5 class="card-title" style="">{{ produit.nom }}</h5>
+                
+                 
+                   <div class="price-box">
+                    <p class="price"> {{ produit.prix }}&nbsp;XAF</p>
                     
                   </div>
-                  <div class="">
-                  <a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn "><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart</a>
+                <div class="">
+                  <a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn " id="submitPrevent"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart</a>
                   </div>
               
                 </div>
-              
-              </div>
-                  {% endfor %}
-
-      
-
-            </div>
-
-          </div>
-              </div>
-     </div>
-   
-</div>
-
-</div>
+             </div>
+             		</div>
+               {% endfor %}
+         </div>
+	
+      </div>
+		</div>
+	</div>
 
 
 {% endblock %}

@@ -31,7 +31,12 @@
 .qt-minus {
 	line-height: 47px;
 }
-
+  @media(max-width:360px){
+    .table tr .ph{
+       display:none;
+    }
+   
+  }
 
 </style>
 
@@ -42,17 +47,17 @@
       <table class="table" border="0" style=" box-shadow: 0 3px 9px 3px rgb(0 0 0 / 1%);">
           <tr style="background-color:var(--salmon-pink); color:#fff;">
              <th>Nom </th>
-             <th>Photo </th>
-              <th>Prix </th>
+             <th class="ph">Photo </th>
+              <th class="">Prix </th>
                <th>Quantité </th>
-                <th>Total </th>
+                <th class="ph">Total </th>
                 <th></th>
            </tr>
              {% for item in items %}
               <tr> 
               <td> {{ item.produit.nom }} </td>
-              <td><img src=" /images/produit/{{ item.produit.imagename}} " style="width:8%; height:8%; border-radius:50%;"></td>
-              <td> {{ item.produit.prix }} </td>
+              <td class="ph"><img src=" {{ asset('uploads/images/' ~ item.produit.imageName) }} " style="width:50px; height:50px; border-radius:50%;"></td>
+              <td class=""> {{ item.produit.prix }} </td>
               <td style="padding: 13px 16px!important;"> 
 
                {% if  item.quantite > 1 %}
@@ -77,14 +82,14 @@
            
               
               </td>
-               <td>  {{ item.produit.prix * item.quantite }} </td>
+               <td class="ph">  {{ item.produit.prix * item.quantite }} </td>
                <td>  <a href=" {{ path('cart-remove' , { 'id': item.produit.id } ) }} " class="btn btn-sm btn-out" style="display:inline-block;">delete</a></td>
               </tr>
              {% endfor %}
-                    <tr>  
-                      <td colspan="3" class="text-right"> Total: </td>
+                    <tr class="col-md">  
+                      <td colspan="3" class="text-right col-md"> Total: </td>
                        <td> {{ total }} </td>
-                        <td> <td>
+                        
                     
                     </tr>
                
@@ -99,7 +104,7 @@
       <div class="col-md-8 m-auto">
     <div class="alert alert-warning text-center  animate__animated animate__fadeInUp" role="alert">
                             Votre panier est vide  ! &nbsp;
-                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
      </div>
     </div>

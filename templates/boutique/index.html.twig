@@ -65,7 +65,7 @@
   outline:none!important;
 }
 </style>
- <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/blog-1.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
+ <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.718),rgba(57, 49, 49, 0.718)), url(images/men.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
         <div class="container">
             <div class="col-sm">
              <br>
@@ -103,16 +103,17 @@
            
             
           <div class="product-main">
-
-            <h2 class=" text-center text-uppercase py-2 fw-bold text-secondary mt-3">Bienvenue dans la boutique</h2>
-
+            
+            <div class="col-md mt-3">
+            <h2 class=" text-center  py-2  text-secondary" style="font-weight:500;">Bienvenue dans la boutique</h2>
+            </div>
             <div class="product-grid mt-2">
 
              {% for produit in produits %}
-              <div class="showcase pb-2">
+              <div class="showcase pb-2 mt-3">
               
                 <div class="showcase-banner">
-                  <img src="/images/produit/{{ produit.imagename }} " alt="Black Floral Wrap Midi Skirt" class="product-img default"
+                  <img src="{{ asset('uploads/images/' ~ produit.imageName) }} " alt="Black Floral Wrap Midi Skirt" class="product-img default"
                     width="300" style="width:100%!important; height:40vh!important;">
                     {% if produit.promo %}
                          <p class="showcase-badge angle pink text-center">En promotion !</p>
@@ -120,16 +121,14 @@
                   
                 </div>
               
-                <div class="showcase-content">
+                <div class="showcase-content p-auto">
                   <a href="{{ path('details' , {'slug': produit.slug }  )}}" class="showcase-category">{{ produit.nom }}</a>
               
-                  <h3>
-                    <a href="{{ path('details' , {'slug': produit.slug }  )}}" class="showcase-title">{{ produit.description |u.truncate(30 ,'...')  }}</a>
-                  </h3>
+                  
                 <h5 class=" text showcase-title  text-secondary text-muted" style="color:;"> {{ produit.category.nom }}</h5>
                   
                   <div class="price-box">
-                    <p class="price"> {{ produit.prix }}&nbsp;FCFA</p>
+                    <p class="price"> {{ produit.prix }}&nbsp;XAF</p>
                     
                   </div>
                   <div class="">

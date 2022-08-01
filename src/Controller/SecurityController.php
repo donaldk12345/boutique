@@ -28,7 +28,7 @@ class SecurityController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $hash=$passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hash);
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_ADMIN']);
           
             $manager->persist($user);
             
