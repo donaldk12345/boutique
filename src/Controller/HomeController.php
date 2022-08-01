@@ -31,7 +31,7 @@ class HomeController extends AbstractController
     /**
      * 
      * @Route("/new-produits", name="new-produits")
-     * 
+     * @Security("is_granted('ROLE_ADMIN')") 
      */
     public function insertProduit(Request $request, EntityManagerInterface $manager,SluggerInterface $slugger): Response
     {
@@ -74,6 +74,7 @@ class HomeController extends AbstractController
      /**
      * 
      * @Route("/category", name="category")
+     * @Security("is_granted('ROLE_ADMIN')") 
      * 
      */
     public function categorieSave(Request $request, EntityManagerInterface $manager){

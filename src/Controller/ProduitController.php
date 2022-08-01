@@ -21,7 +21,7 @@ class ProduitController extends AbstractController
     
     /**
      *@Route("/produit", name="produit") 
-     * 
+     *@Security("is_granted('ROLE_ADMIN')") 
      */
     public function index(ProduitRepository $produitRepository): Response
     {
@@ -38,8 +38,9 @@ class ProduitController extends AbstractController
      * @Route("/{id}/edit", name="app_produit_edit", methods={"GET","POST"})
      * @Security("is_granted('ROLE_ADMIN')") 
      */
-    public function edit(Request $request, Produit $produit,EntityManagerInterface $entityManagerInterface,SluggerInterface $slugger): Response
-    {
+    public function edit($id,Request $request, ProduitRepository $produitRepository,EntityManagerInterface $entityManagerInterface,SluggerInterface $slugger): Response
+    {  
+        $produit=$produitRepository->findOneBy(['id'=> $id]);
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
@@ -79,7 +80,8 @@ class ProduitController extends AbstractController
  * @Security("is_granted('ROLE_ADMIN')") 
  * 
  */
-public function deleteProduit(Produit $produit, Request $request,EntityManagerInterface $entityManagerInterface){
+public function deleteProduit($id,ProduitRepository $produitRepository, Request $request,EntityManagerInterface $entityManagerInterface){
+    $produit=$produitRepository->findOneBy(['id'=> $id]);
     $data = json_decode($request->getContent(), true);
 
     // On vérifie si le token est valide
