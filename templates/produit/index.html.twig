@@ -14,6 +14,7 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Prix</th>
+                <th>ImageName</th>
                 <th>Quantite</th>
                 <th>Photo</th>
                 <th>Actions</th>
@@ -25,6 +26,7 @@
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.nom }}</td>
                 <td>{{ produit.prix }}</td>
+                <td> {{ produit.imageName }} </td>
                  <td>
                  {% if produit.quantite < 1 %}
                       0
