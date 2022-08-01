@@ -45,7 +45,9 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var file $file*/
+            
+           /* 
+           
             $file = $form->get('imageName')->getData();
             if($file){
                 
@@ -62,6 +64,7 @@ class ProduitController extends AbstractController
                 }
                 $produit->setImageName($fileName); 
             }
+            */
             $entityManagerInterface->flush();
 
             return $this->redirectToRoute('produit');
