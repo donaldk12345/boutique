@@ -28,12 +28,14 @@ class ProduitType extends AbstractType
                 'class'=> Category::class
             ])
             ->add('description',TextareaType::class)
-            ->add('imageName', FileType::class, [
+            ->add('imageName', TextType::class)
+            /*->add('imageName', FileType::class, [
                 'label' => 'Image du produit',
                 'mapped' => false,
                 'required' => false,
                 
             ])
+            */
         ;
     }
 
