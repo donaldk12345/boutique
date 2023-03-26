@@ -19,7 +19,7 @@
         "build": "encore production --progress"
     },
     "engines": {
-        "node": "v14.16.*",
+        "node": "v16.13.0*",
         "yarn": "1.22.*"
     },
     "dependencies": {

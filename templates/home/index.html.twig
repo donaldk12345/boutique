@@ -1,223 +1,225 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home
+{% endblock %}
 
 {% block body %}
-<style>
-body{
-  background-color:var(--body-color)!important;
-}
-.card .inner img{
-    width:100%;
-}
-#facilities{
-    padding: 30px 0px;
+	<style>
+		body {
+			background-color: var(--body-color) !important;
+		}
+		.card .inner img {
+			width: 100%;
+		}
+		#facilities {
+			padding: 30px 0;
 
 
-}
-#facilities h1{
-    font-weight:900;
-    font-size:34px;
-    padding-bottom:5px;
-}
-.title{
-    text-align:center;
-    padding: 25px 0px;
-}
-.card-body button{
-  border-radius: 50px;
-  margin-right: 15px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 14px 28px 13px 28px;
-  background-color:#a0b4cf;
-  border: none;
-  margin-top: 10px;
-  
-}
-.card-body button:hover{
-  background-color:#A0B4CFC5;
-}
-.card-body button a{
-    text-decoration:none;
-    color:rgba(255, 255, 255, 0.788);
-}
-.card{
-  margin:5px;
-  box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
-    
-}
-.inner{
-    overflow:hidden;
-  }
-  .inner img{
-    transition: all 0.8s ease;
-  }
-  .inner:hover img{
-    transform:scale(1.3);
-  }
-  .but button {
-    margin-right: 15px;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 14px 28px 13px 28px;
-    background-color: #fff;
-    border: solid 1px #fff;
-    color: rgba(17, 17, 17, 0.705);
-}
+		}
+		#facilities h1 {
+			font-weight: 900;
+			font-size: 34px;
+			padding-bottom: 5px;
+		}
+		.title {
+			text-align: center;
+			padding: 25px 0;
+		}
+		.card-body button {
+			border-radius: 50px;
+			margin-right: 15px;
+			font-size: 11px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			padding: 14px 28px 13px;
+			background-color: #a0b4cf;
+			border: none;
+			margin-top: 10px;
 
-.but button a {
-    color: rgba(17, 17, 17, 0.705);
-}
+		}
+		.card-body button:hover {
+			background-color: #A0B4CFC5;
+		}
+		.card-body button a {
+			text-decoration: none;
+			color: rgba(255, 255, 255, 0.788);
+		}
+		.card {
+			margin: 5px;
+			box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
 
-.but button:hover {
-    background-color: transparent;
-    border: solid 1px #fff;
-    color: #fff;
-    transition: 0.5s;
-}
-.but{
-  justify-content:center;
-  text-align:center;
-  display:flex;
-}
+		}
+		.inner {
+			overflow: hidden;
+		}
+		.inner img {
+			transition: all 0.8s ease;
+		}
+		.inner:hover img {
+			transform: scale(1.3);
+		}
+		.but button {
+			margin-right: 15px;
+			font-size: 11px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			padding: 14px 28px 13px;
+			background-color: #fff;
+			border: solid 1px #fff;
+			color: rgba(17, 17, 17, 0.705);
+		}
 
-.but button a:hover {
-    color: #fff;
-}
-.list-section {
-  background-color: #f5f5f5;
-  padding-bottom: 80px!important;
-  padding-top:80px!important;
+		.but button a {
+			color: rgba(17, 17, 17, 0.705);
+		}
 
-}
+		.but button:hover {
+			background-color: transparent;
+			border: solid 1px #fff;
+			color: #fff;
+			transition: 0.5s;
+		}
+		.but {
+			justify-content: center;
+			text-align: center;
+			display: flex;
+		}
 
+		.but button a:hover {
+			color: #fff;
+		}
+		.list-section {
+			background-color: #f5f5f5;
+			padding-bottom: 80px !important;
+			padding-top: 80px !important;
 
-.list-box {
-  overflow: hidden;
-  letter-spacing: 0.5px;
-}
-
-.list-box .content h3 {
-  display: block;
-  line-height: 22px;
-  font-size: 18px;
-  margin-bottom: 4px;
-}
-
-.list-box .content p {
-  margin-bottom: 0px;
-  opacity: 0.75;
-}
-
- .list-box .list-icon .al{
-  display: block;
-  font-size: 30px;
-  margin-right: 15px;
-  color: var(--salmon-pink);
-  width: 65px;
-  height: 65px;
-  text-align: center;
-  line-height: 60px;
-  border-radius: 999px;
-}
-.section-title h3 {
-  font-size: 40px;
-  position: relative;
-  padding-bottom: 15px;
-}
-
-.section-title h3:after {
-  position: absolute;
-  content: '';
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  width: 50px;
-  height: 2px;
-  background-color:  color: var(--salmon-pink);;
-  margin: 0 auto;
-}
-.orange-text{
-   color: var(--salmon-pink);
-}
-
-.section-title p {
-  font-size: 15px;
- 
-  margin: 0 auto;
-  color: #555;
-  margin-top: 10px;
-  line-height: 1.8;
-}
-
-.section-title {
-  margin-bottom: 80px;
-}
-.product-section{
-  padding-bottom:100px!important;
-  margin-top:100px!important;
-
-}
-.card-body button{
-  border-radius: 50px;
-  margin-right: 15px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 14px 28px 13px 28px;
-  background-color:#F8F8F8F8;
-  border: none;
-  margin-top: 10px;
+		}
 
 
-  
-}
-.card-body button:hover{
-  background-color:#efefefec;
-}
-.card-body button a{
-    text-decoration:none;
-      color:#636a74e0;
-}
-.card{
-  margin:5px;
-  box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
-    
-}
-.inner{
-    overflow:hidden;
-  }
-  .inner img{
-    transition: all 1.5s ease;
-  }
-  .inner:hover img{
-    transform:scale(1.3);
-  }
+		.list-box {
+			overflow: hidden;
+			letter-spacing: 0.5px;
+		}
+
+		.list-box .content h3 {
+			display: block;
+			line-height: 22px;
+			font-size: 18px;
+			margin-bottom: 4px;
+		}
+
+		.list-box .content p {
+			margin-bottom: 0;
+			opacity: 0.75;
+		}
+
+		.list-box .list-icon .al {
+			display: block;
+			font-size: 30px;
+			margin-right: 15px;
+			color: var(--salmon-pink);
+			width: 65px;
+			height: 65px;
+			text-align: center;
+			line-height: 60px;
+			border-radius: 999px;
+		}
+		.section-title h3 {
+			font-size: 40px;
+			position: relative;
+			padding-bottom: 15px;
+		}
+
+		.section-title h3:after {
+			position: absolute;
+			content: '';
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: 50px;
+			height: 2px;
+			background-color: color: var(--salmon-pink);
+			margin: 0 auto;
+		}
+		.orange-text {
+			color: var(--salmon-pink);
+		}
+
+		.section-title p {
+			font-size: 15px margin: 0 auto;
+			color: #555;
+			margin-top: 10px;
+			line-height: 1.8;
+		}
+
+		.section-title {
+			margin-bottom: 80px;
+		}
+		.product-section {
+			padding-bottom: 100px !important;
+			margin-top: 100px !important;
+
+		}
+		.card-body button {
+			border-radius: 50px;
+			margin-right: 15px;
+			font-size: 11px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			padding: 14px 28px 13px;
+			background-color: #F8F8F8F8;
+			border: none;
+			margin-top: 10px;
 
 
-</style>
-   <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/h1_hero2.png); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
-        <div class="container">
-            <div class="col-sm">
-             <br>
-            <br>
-                <h4 class="text-center  p-3" style="color: rgba(255, 255, 255, 0.89); text-transform: uppercase;font-family: 'Poppins', sans-serif;">Bienvenue sur l'un des meilleurs site de e-commerce !</h4>
+		}
+		.card-body button:hover {
+			background-color: #efefefec;
+		}
+		.card-body button a {
+			text-decoration: none;
+			color: #636a74e0;
+		}
+		.card {
+			margin: 5px;
+			box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
 
-            </div>
-            <div class="text-center">
-                <p style="color:rgba(255,255,255,0.71);font-family: 'Poppins', sans-serif;">Découvrer des aujourd'hui nos meilleurs produits à un bas prix  </p><br>
-                
-                <div class="but"><button> <a href="" class="text-center">Super promo ! </a></button></div>
-            </div>
+		}
+		.inner {
+			overflow: hidden;
+		}
+		.inner img {
+			transition: all 1.5s ease;
+		}
+		.inner:hover img {
+			transform: scale(1.3);
+		}
+	</style>
+	<div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/h1_hero2.png); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
+		<div class="container">
+			<div class="col-sm">
+				<br>
+				<br>
+				<h4 class="text-center  p-3" style="color: rgba(255, 255, 255, 0.89); text-transform: uppercase;font-family: 'Poppins', sans-serif;">Bienvenue sur l'un des meilleurs site de e-commerce !</h4>
+
+			</div>
+			<div class="text-center">
+				<p style="color:rgba(255,255,255,0.71);font-family: 'Poppins', sans-serif;">Découvrer des aujourd'hui nos meilleurs produits à un bas prix
+				</p><br>
+
+				<div class="but">
+					<button>
+						<a href="" class="text-center">Super promo !
+						</a>
+					</button>
+				</div>
+			</div>
 
 
-        </div>
-   </div>
+		</div>
+	</div>
 
-   <div class="list-section ">
+	<div class="list-section ">
 		<div class="container ">
 
 			<div class="row m-auto">
@@ -258,44 +260,49 @@ body{
 
 		</div>
 	</div>
-  <div class="product-section">
+	<div class="product-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title text">	
-						<h3><span class="orange-text">Nos</span> Produits</h3>
+					<div class="section-title text">
+						<h3>
+							<span class="orange-text">Nos</span>
+							Produits</h3>
 						<p class="text">Ynoshop vous presente quelques produits nouvellement ajouter , rendez vous dans la boutique pour voir plus.</p>
 					</div>
 				</div>
 			</div>
-    <div class="col-md-10 mt-2 m-auto">
-			<div class="row justify-content-center">
-		    
-             {% for produit in produits %}
-              <div class="col-md-4">
-             <div class=" card text-center">
-               <div class="inner">
-              <a href="{{ path('details' , {'slug': produit.slug }  )}}">  <img src="{{ asset('uploads/images/' ~ produit.imageName) }}" style="width:100%; height:190px;"></a>
-               </div>
-                <div class="card-body">
-                <h5 class="card-title" style="">{{ produit.nom }}</h5>
-                
-                 
-                   <div class="price-box">
-                    <p class="price"> {{ produit.prix }}&nbsp;XAF</p>
-                    
-                  </div>
-                <div class="">
-                  <a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn " id="submitPrevent"><i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart</a>
-                  </div>
-              
-                </div>
-             </div>
-             		</div>
-               {% endfor %}
-         </div>
-	
-      </div>
+			<div class="col-md-10 mt-2 m-auto">
+				<div class="row justify-content-center">
+
+					{% for produit in produits %}
+						<div class="col-md-4">
+							<div class=" card text-center">
+								<div class="inner">
+									<a href="{{ path('details' , {'slug': produit.slug } )}}">
+										<img src="{{ asset('uploads/images/' ~ produit.imageName) }}" style="width:100%; height:190px;"></a>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title" style="">{{ produit.nom }}</h5>
+
+
+									<div class="price-box">
+										<p class="price">
+											{{ produit.prix }}&nbsp;XAF</p>
+
+									</div>
+									<div class="">
+										<a href=" {{ path('card_add' , {'id': produit.id }) }} " class="add-cart-btn " id="submitPrevent">
+											<i class="fas fa-shopping-cart"></i>&nbsp;&nbsp;Add to cart</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+
+			</div>
 		</div>
 	</div>
 

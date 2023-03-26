@@ -1,18 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SecurityController!{% endblock %}
+{% block title %}Hello SecurityController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<div class="container">
-<h3 class="my-3 text-center">Mes commandes :
-	</h3>
-	{% if purchases | length > 0 %}
-		<table class="table" border="0" style=" box-shadow: 0 3px 9px 3px rgb(0 0 0 / 1%);">
-			
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+	<div class="container">
+		<h3 class="my-3 text-center">Mes commandes : &nbsp;
+			{{ purchases|length }}
+		</h3>
+		{% if purchases | length > 0 %}
+			<table class="table" border="0" style=" box-shadow: 0 3px 9px 3px rgb(0 0 0 / 1%);">
+
 				<tr style="background-color:var(--salmon-pink); color:#fff;">
 					<th>Numéro</th>
 					<th>Adresse</th>
@@ -20,8 +30,8 @@
 					<th>Produits</th>
 					<th>Total</th>
 				</tr>
-		
-		
+
+
 				{% for purchase in purchases %}
 					<tr>
 						<td>{{ purchase.id }}</td>
@@ -40,13 +50,13 @@
 						<td>{{ purchase.total }}</td>
 					</tr>
 				{% endfor %}
-			
-		</table>
-	{% else %}
-		<div class="alert alert-info mt-3">
-			<h5>Vous n'avez pas encore fait de commande 😥 !</h5>
-		</div>
-	{% endif %}
 
-    </div>
+			</table>
+		{% else %}
+			<div class="alert alert-info mt-3">
+				<h5>Vous n'avez pas encore fait de commande 😥 !</h5>
+			</div>
+		{% endif %}
+
+	</div>
 {% endblock %}

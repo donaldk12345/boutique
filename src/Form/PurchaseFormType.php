@@ -10,16 +10,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PurchaseFormType extends AbstractType
 {
+
+    /**
+     * @param string $label
+     * @param string $placeholder
+     * @return array
+     */
+    public function getConfiguration($label, $placeholder)
+    {
+        return [
+            'label' => $label,
+            'attr' => [
+                'placeholder' => $placeholder
+            ]
+        ];
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name',TextType::class)
-            ->add('address',TextType::class)
-            ->add('codepostal',TextType::class)
-            ->add('city',TextType::class)
-          
-            
-        ;
+            ->add('name', TextType::class, $this->getConfiguration(" Nom", "Veillez saisir votre nom "))
+            ->add('address', TextType::class, $this->getConfiguration("Adresse", "Veillez saisir votre adresse "))
+            ->add('codepostal', TextType::class, $this->getConfiguration("Code postal", "Veillez saisir le code postal"))
+            ->add('city', TextType::class, $this->getConfiguration("Ville", "Veillez saisir votre ville"));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

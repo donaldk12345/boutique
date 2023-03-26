@@ -17,13 +17,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PurchaseController extends AbstractController
 {
 
- 
+
     /**
      * 
      *@Route("/confirmation", name="confirmation")
      *
      */
-    public function index(Request $request,EntityManagerInterface $entityManagerInterface,ShoppingCart $shoppingCart,Security $security)
+    public function index(Request $request, EntityManagerInterface $entityManagerInterface, ShoppingCart $shoppingCart, Security $security)
     {
 
         $form = $this->createForm(PurchaseFormType::class);
@@ -31,13 +31,13 @@ class PurchaseController extends AbstractController
 
         if (!$form->isSubmitted() && $form->isValid()) {
 
-            
+
             return $this->redirectToRoute('card_add');
         }
 
         $cart = $shoppingCart->getDetailCartItems();
         if (count($cart) === 0) {
-          
+
             return $this->redirectToRoute('card_add');
         }
 
@@ -47,32 +47,31 @@ class PurchaseController extends AbstractController
         $purchase = $form->getData();
 
         $purchase->setUserPurchase($security->getUser())
-        ->setTotal($shoppingCart->getTotal())
-        ->setCreatedAt(new DateTimeImmutable());
+            ->setTotal($shoppingCart->getTotal())
+            ->setCreatedAt(new DateTimeImmutable());
 
 
 
-       $entityManagerInterface->persist($purchase);
-       $entityManagerInterface->flush();
+        $entityManagerInterface->persist($purchase);
+        $entityManagerInterface->flush();
 
-      foreach ($shoppingCart->getDetailCartItems() as $cartItem) {
-         $purchaseCart = new PurchaseCart;
-         $purchaseCart->setProduit($cartItem->produit)
-           ->setPurchase($purchase)
-           ->setNomProduit($cartItem->produit->getNom())
-          ->setPrixProduit($cartItem->produit->getPrix())
-          ->setQuantiteProduit($cartItem->quantite)
-          ->setTotal($cartItem->getTotal());
-          //dd($purchaseItem);
-          
-          $entityManagerInterface->persist($purchaseCart);
-       }
+        foreach ($shoppingCart->getDetailCartItems() as $cartItem) {
+            $purchaseCart = new PurchaseCart;
+            $purchaseCart->setProduit($cartItem->produit)
+                ->setPurchase($purchase)
+                ->setNomProduit($cartItem->produit->getNom())
+                ->setPrixProduit($cartItem->produit->getPrix())
+                ->setQuantiteProduit($cartItem->quantite)
+                ->setTotal($cartItem->getTotal());
+            //dd($purchaseItem);
+
+            $entityManagerInterface->persist($purchaseCart);
+        }
 
         $entityManagerInterface->flush();
-        return $this->redirectToRoute('payement'); 
-        
+        return $this->redirectToRoute('payement');
     }
-    
+
     /**
      * @Route("/commande", name="app_commande")
      * 
@@ -85,6 +84,4 @@ class PurchaseController extends AbstractController
             'purchases' => $user->getPurchases()
         ]);
     }
-  
-  
 }

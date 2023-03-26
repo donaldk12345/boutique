@@ -1,367 +1,387 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BoutiqueController!{% endblock %}
+{% block title %}Hello BoutiqueController!
+{% endblock %}
 
 {% block body %}
-<style>
-  /*-----------------------------------*\
+	<style>
+		/*-----------------------------------*\
   #PRODUCT FEATURED
 \*-----------------------------------*/
-    
-    .product-featured {
-        margin-bottom: 30px;
-    }
-    
-    .product-featured .showcase-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        overflow-x: auto;
-        overscroll-behavior-inline: contain;
-        scroll-snap-type: inline mandatory;
-    }
-    
-    .product-featured .showcase-container {
-        min-width: 100%;
-        padding: 30px;
-        border: 1px solid var(--cultured);
-        border-radius: var(--border-radius-md);
-        scroll-snap-align: start;
-    }
-    
-    .product-featured .showcase-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    .product-featured .showcase-content {
-        margin-top: 30px;
-    }
-    
-    .product-featured .showcase-rating {
-        color: var(--sandy-brown);
-        display: flex;
-        align-items: center;
-        font-size: 16px;
-        margin-bottom: 15px;
-    }
-    
-    .product-featured .showcase-title {
-        font-size: var(--fs-7);
-        color: var(--eerie-black);
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        text-transform: uppercase;
-        margin-bottom: 3px;
-    }
-    
-    .product-featured .showcase-desc {
-        color: var(--sonic-silver);
-        font-size: var(--fs-7);
-        font-weight: var(--weight-300);
-        margin-bottom: 10px;
-    }
-    
-    .product-featured .price-box {
-        font-size: var(--fs-3);
-        display: flex;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-    
-    .product-featured .price {
-        color: var(--salmon-pink);
-        font-weight: var(--weight-700);
-    }
-    
-    .product-featured del {
-        color: var(--sonic-silver);
-        font-weight: var(--weight-300);
-    }
-    
-    .product-featured .add-cart-btn {
-        background: var(--salmon-pink);
-        padding: 8px 15px;
-        color: var(--white);
-        font-weight: var(--fs-9);
-        font-weight: var(--weight-700);
-        text-transform: uppercase;
-        border-radius: var(--border-radius-md);
-        margin-bottom: 15px;
-        transition: var(--transition-timing);
-    }
-    
-    .product-featured .add-cart-btn:hover {
-        background: var(--eerie-black);
-        color: var(--white);
-    }
-    
-    .product-featured .showcase-status {
-        margin-bottom: 15px;
-    }
-    
-    .product-featured .showcase-status .wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: var(--eerie-black);
-        font-size: var(--fs-9);
-        font-weight: var(--weight-400);
-        text-transform: uppercase;
-        margin-bottom: 10px;
-    }
-    
-    .product-featured .showcase-status-bar {
-        background: var(--cultured);
-        position: relative;
-        height: 10px;
-        border-radius: 5px;
-    }
-    
-    .product-featured .showcase-status-bar::before {
-        position: absolute;
-        content: '';
-        top: 3px;
-        left: 3px;
-        height: 4px;
-        width: 40%;
-        background: var(--salmon-pink);
-        border-radius: 4px;
-    }
-    
-    .product-featured .countdown-desc {
-        color: var(--eerie-black);
-        font-size: var(--fs-9);
-        font-weight: var(--weight-600);
-        text-transform: uppercase;
-        margin-bottom: 10px;
-    }
-    
-    .product-featured .countdown {
-        display: flex;
-        gap: 5px;
-    }
-    
-    .product-featured .countdown-content {
-        padding: 5px;
-        background: var(--cultured);
-        border-radius: var(--border-radius-md);
-        text-align: center;
-    }
-    
-    .product-featured .display-number {
-        color: var(--eerie-black);
-        font-size: var(--fs-5);
-        font-weight: var(--weight-500);
-        min-width: 40px;
-    }
-    
-    .product-featured .display-text {
-        color: var(--davys-gray);
-        font-size: var(--fs-11);
-    }
-    
-    .product-featured .showcase>div {
-        min-width: calc(50% - 10px);
-    }
-.but button {
-    margin-right: 15px;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 14px 28px 13px 28px;
-    background-color: #fff;
-    border: solid 1px #fff;
-    color: rgba(17, 17, 17, 0.705);
-}
 
-.but button a {
-    color: rgba(17, 17, 17, 0.705);
-}
+		.product-featured {
+			margin-bottom: 30px;
+		}
 
-.but button:hover {
-    background-color: transparent;
-    border: solid 1px #fff;
-    color: #fff;
-    transition: 0.5s;
-}
-.but{
-  justify-content:center;
-  text-align:center;
-  display:flex;
-}
+		.product-featured .showcase-wrapper {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			overflow-x: auto;
+			overscroll-behavior-inline: contain;
+			scroll-snap-type: inline mandatory;
+		}
 
-.but button a:hover {
-    color: #fff;
-}
-.pagina{
-  margin-left:15px;
-  margin-bottom:20px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-.page-item.active .page-link{
-  background-color:hsl(353, 100%, 78%)!important;
-  border:none;
-  color:#fff!important;
-}
-.page-link{
-  color:hsl(0, 0%, 27%)!important;
-  outline:none!important;
-}
-.card{
-   border: 1px solid var(--cultured)!important;
-  border-radius: var(--border-radius-md)!important;
-}
-</style>
- <div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(images/blog-2.jpg); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
-        <div class="container">
-            <div class="col-sm">
-             <br>
-            <br>
-                <h1 class="text-center  p-3" style="color: rgba(255, 255, 255, 0.89); text-transform: uppercase;font-family: 'Poppins', sans-serif;">New Arrival !</h1>
+		.product-featured .showcase-container {
+			min-width: 100%;
+			padding: 30px;
+			border: 1px solid var(--cultured);
+			border-radius: var(--border-radius-md);
+			scroll-snap-align: start;
+		}
 
-            </div>
-            <div class="text-center">
-                <p style="color:rgba(255,255,255,0.71);font-family: 'Poppins', sans-serif;">Découvrez des maintenant les meilleurs produits de vos réves à un bas prix  </p><br>
-                
-                <div class="but"><button> <a href="" class="text-center">Shop Now </a></button></div>
-            </div>
+		.product-featured .showcase-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.product-featured .showcase-content {
+			margin-top: 30px;
+		}
+
+		.product-featured .showcase-rating {
+			color: var(--sandy-brown);
+			display: flex;
+			align-items: center;
+			font-size: 16px;
+			margin-bottom: 15px;
+		}
+
+		.product-featured .showcase-title {
+			font-size: var(--fs-7);
+			color: var(--eerie-black);
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			text-transform: uppercase;
+			margin-bottom: 3px;
+		}
+
+		.product-featured .showcase-desc {
+			color: var(--sonic-silver);
+			font-size: var(--fs-7);
+			font-weight: var(--weight-300);
+			margin-bottom: 10px;
+		}
+
+		.product-featured .price-box {
+			font-size: var(--fs-3);
+			display: flex;
+			gap: 10px;
+			margin-bottom: 10px;
+		}
+
+		.product-featured .price {
+			color: var(--salmon-pink);
+			font-weight: var(--weight-700);
+		}
+
+		.product-featured del {
+			color: var(--sonic-silver);
+			font-weight: var(--weight-300);
+		}
+
+		.product-featured .add-cart-btn {
+			background: var(--salmon-pink);
+			padding: 8px 15px;
+			color: var(--white);
+			font-weight: var(--fs-9);
+			font-weight: var(--weight-700);
+			text-transform: uppercase;
+			border-radius: var(--border-radius-md);
+			margin-bottom: 15px;
+			transition: var(--transition-timing);
+		}
+
+		.product-featured .add-cart-btn:hover {
+			background: var(--eerie-black);
+			color: var(--white);
+		}
+
+		.product-featured .showcase-status {
+			margin-bottom: 15px;
+		}
+
+		.product-featured .showcase-status .wrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: var(--eerie-black);
+			font-size: var(--fs-9);
+			font-weight: var(--weight-400);
+			text-transform: uppercase;
+			margin-bottom: 10px;
+		}
+
+		.product-featured .showcase-status-bar {
+			background: var(--cultured);
+			position: relative;
+			height: 10px;
+			border-radius: 5px;
+		}
+
+		.product-featured .showcase-status-bar::before {
+			position: absolute;
+			content: '';
+			top: 3px;
+			left: 3px;
+			height: 4px;
+			width: 40%;
+			background: var(--salmon-pink);
+			border-radius: 4px;
+		}
+
+		.product-featured .countdown-desc {
+			color: var(--eerie-black);
+			font-size: var(--fs-9);
+			font-weight: var(--weight-600);
+			text-transform: uppercase;
+			margin-bottom: 10px;
+		}
+
+		.product-featured .countdown {
+			display: flex;
+			gap: 5px;
+		}
+
+		.product-featured .countdown-content {
+			padding: 5px;
+			background: var(--cultured);
+			border-radius: var(--border-radius-md);
+			text-align: center;
+		}
+
+		.product-featured .display-number {
+			color: var(--eerie-black);
+			font-size: var(--fs-5);
+			font-weight: var(--weight-500);
+			min-width: 40px;
+		}
+
+		.product-featured .display-text {
+			color: var(--davys-gray);
+			font-size: var(--fs-11);
+		}
+
+		.product-featured .showcase > div {
+			min-width: calc(50% - 10px);
+		}
+		.but button {
+			margin-right: 15px;
+			font-size: 11px;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			padding: 14px 28px 13px;
+			background-color: #fff;
+			border: solid 1px #fff;
+			color: rgba(17, 17, 17, 0.705);
+		}
+
+		.but button a {
+			color: rgba(17, 17, 17, 0.705);
+		}
+
+		.but button:hover {
+			background-color: transparent;
+			border: solid 1px #fff;
+			color: #fff;
+			transition: 0.5s;
+		}
+		.but {
+			justify-content: center;
+			text-align: center;
+			display: flex;
+		}
+
+		.but button a:hover {
+			color: #fff;
+		}
+		.pagina {
+			margin-left: 15px;
+			margin-bottom: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.page-item.active .page-link {
+			background-color: hsl(353, 100%, 78%) !important;
+			border: none;
+			color: #fff !important;
+		}
+		.page-link {
+			color: hsl(0, 0%, 27%) !important;
+			outline: none !important;
+		}
+		.card {
+			border: 1px solid var(--cultured) !important;
+			border-radius: var(--border-radius-md) !important;
+		}
+
+	</style>
+	<div class="hdd" style="background-image:linear-gradient(rgba(57, 49, 49, 0.518),rgba(57, 49, 49, 0.518)), url(../images/h1_hero1.png); height: 75vh; width: 100%; background-position: center center; background-size: cover; background-repeat: no-repeat;background-attachment: fixed;">
 
 
-        </div>
-   </div>
-   
- <div class="container pt-4">
-     <div class="row">
-          <div class="col-md category pt-2  pb-2 m-auto">
-               <h5 class="text-muted  mt-3 text-capitalize text-uppercase">Autres produits</h5>
-              <div class="row mb-5">
-                <div class="col-md">
-                  {% for promo in promos %}
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md">
-                        <img class="card-img card-img-left" src="{{ asset('uploads/images/' ~ promo.imageName) }}"  style="height:20vh!important"  alt="Card image"/>
-                      </div>
-                      <div class="col-md">
-                        <div class="card-body">
-                         <a href="{{ path('details' , {'slug': promo.slug }  )}}" class="text-decoration-none text-muted text-small" style="color:hsl(353, 100%, 78%)!important;" >{{ promo.nom }}</a>
-                          <p class="card-text"><small class="text-muted"> {{ promo.prix }}  &nbsp;XAF</small></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                      {% endfor %}
-                </div>
-              </div>
-            </div>
+		<div class="container">
+			<div class="col-sm">
+				<br>
+				<br>
+				<h1 class="text-center  p-3" style="color: rgba(255, 255, 255, 0.89); text-transform: uppercase;font-family: 'Poppins', sans-serif;">Page details</h1>
 
-      
-         <div class="col-md-9">
-          <div class="row mt-4">
-           
-            
-              <div class="product-featured">
+			</div>
+			<div class="text-center">
+				<p style="color:rgba(255,255,255,0.71);font-family: 'Poppins', sans-serif;">Dans cette page vous verrez les details de votre produit avec la possibilité d'en choisir un autre
+				</p><br>
 
-            <h2 class=" text-uppercase text-muted text-opacity-75 text-center mt-2 " style="font-size:26px!important;">Details du produit</h2>
-
-            <div class="showcase-wrapper has-scrollbar">
-
-              <div class="showcase-container">
-
-                <div class="showcase">
-                  
-                  <div class="showcase-banner">
-                    <img src="{{ asset('uploads/images/' ~ produits.imageName) }}" alt="shampoo, conditioner & facewash packs" class="showcase-img">
-                  </div>
-
-                  <div class="showcase-content">
-                    
-                    <a href="#">
-                      <h3 class="showcase-title">{{ produits.nom }}</h3>
-                    </a>
-
-                    <p class="showcase-desc">
-                      {{ produits.description  }}
-                    </p>
-
-                    <div class="price-box">
-                      <p class="price">{{ produits.prix }}&nbsp;XAF</p>
-
-                     
-                    </div>
-
-                    <button class="add-cart-btn"><a  href="{{ path('card_add' , {'id': produits.id }) }} " >add to cart</a></button>
-
-                    <div class="showcase-status">
-                      <div class="wrapper">
-                        <p>
-                          prix d'avant: <b>20 XAF</b>
-                        </p>
-
-                        <p>
-                          Disponible: <b> {{ produits.quantite }} </b>
-                        </p>
-                      </div>
-
-                    
-                    </div>
-                     <!--
-
-                    <div class="countdown-box">
-
-                      <p class="countdown-desc">
-                        Hurry Up! Offer ends in:
-                      </p>
-
-                      <div class="countdown">
-
-                        <div class="countdown-content">
-
-                          <p class="display-number">360</p>
-
-                          <p class="display-text">Days</p>
-
-                        </div>
-
-                        <div class="countdown-content">
-                          <p class="display-number">24</p>
-                          <p class="display-text">Hours</p>
-                        </div>
-
-                        <div class="countdown-content">
-                          <p class="display-number">59</p>
-                          <p class="display-text">Min</p>
-                        </div>
-
-                        <div class="countdown-content">
-                          <p class="display-number">00</p>
-                          <p class="display-text">Sec</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-                    -->
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-           
-        </div>
-         </div>
-   </div>
+				{# <div class="but">
+													<button>
+														<a href="" class="text-center">Shop Now
+														</a>
+													</button>
+												</div> #}
+			</div>
 
 
- </div>
+		</div>
+	</div>
+
+	<div class="container pt-4">
+		<div class="row">
+			<div class="col-md category pt-2  pb-2 m-auto">
+				<h5 class="text-muted  mt-3 text-capitalize text-uppercase">Autres produits</h5>
+				<div class="row mb-5">
+					<div class="col-md">
+						{% for promo in promos %}
+							<div class="card mb-3">
+								<div class="row g-0">
+									<div class="col-md">
+										<img class="card-img card-img-left" src="{{ asset('uploads/images/' ~ promo.imageName) }}" style="height:20vh!important" alt="Card image"/>
+									</div>
+									<div class="col-md">
+										<div class="card-body">
+											<a href="{{ path('details' , {'slug': promo.slug } )}}" class="text-decoration-none text-muted text-small" style="color:hsl(353, 100%, 78%)!important;">{{ promo.nom }}</a>
+											<p class="card-text">
+												<small class="text-muted">
+													{{ promo.prix }}
+													&nbsp;XAF</small>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-9">
+				<div class="row mt-4">
+
+
+					<div class="product-featured">
+
+						<h2 class=" text-uppercase text-muted text-opacity-75 text-center mt-2 " style="font-size:26px!important;">Details du produit</h2>
+
+						<div class="showcase-wrapper has-scrollbar">
+
+							<div class="showcase-container">
+
+								<div class="showcase">
+
+									<div class="showcase-banner">
+										<img src="{{ asset('uploads/images/' ~ produits.imageName) }}" alt="shampoo, conditioner & facewash packs" class="showcase-img">
+									</div>
+
+									<div class="showcase-content">
+
+										<a href="#">
+											<h3 class="showcase-title">{{ produits.nom }}</h3>
+										</a>
+
+										<p class="showcase-desc">
+											{{ produits.description  }}
+										</p>
+
+										<div class="price-box">
+											<p class="price">{{ produits.prix }}&nbsp;XAF</p>
+
+
+										</div>
+
+										<button class="add-cart-btn">
+											<a href="{{ path('card_add' , {'id': produits.id }) }} ">add to cart</a>
+										</button>
+
+										<div class="showcase-status">
+											<div class="wrapper">
+												<p>
+													prix d'avant:
+													<b>20 XAF</b>
+												</p>
+
+												<p>
+													Disponible:
+													<b>
+														{{ produits.quantite }}
+													</b>
+												</p>
+											</div>
+
+
+										</div>
+										<!--
+																																																																						
+																																																																						                    <div class="countdown-box">
+																																																																						
+																																																																						                      <p class="countdown-desc">
+																																																																						                        Hurry Up! Offer ends in:
+																																																																						                      </p>
+																																																																						
+																																																																						                      <div class="countdown">
+																																																																						
+																																																																						                        <div class="countdown-content">
+																																																																						
+																																																																						                          <p class="display-number">360</p>
+																																																																						
+																																																																						                          <p class="display-text">Days</p>
+																																																																						
+																																																																						                        </div>
+																																																																						
+																																																																						                        <div class="countdown-content">
+																																																																						                          <p class="display-number">24</p>
+																																																																						                          <p class="display-text">Hours</p>
+																																																																						                        </div>
+																																																																						
+																																																																						                        <div class="countdown-content">
+																																																																						                          <p class="display-number">59</p>
+																																																																						                          <p class="display-text">Min</p>
+																																																																						                        </div>
+																																																																						
+																																																																						                        <div class="countdown-content">
+																																																																						                          <p class="display-number">00</p>
+																																																																						                          <p class="display-text">Sec</p>
+																																																																						                        </div>
+																																																																						
+																																																																						                      </div>
+																																																																						
+																																																																						                    </div>
+																																																																						                    -->
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div>
 {% endblock %}

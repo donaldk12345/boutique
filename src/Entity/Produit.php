@@ -21,14 +21,14 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 class Produit
 {
 
-     /**
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
 
-    
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -45,20 +45,20 @@ class Produit
     private $description;
 
 
-     /**
+    /**
      * @var string|null
      * @ORM\Column(type="string", length=255)
      */
     private $imageName;
-     /**
+    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
-      /**
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
- 
+
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -81,21 +81,27 @@ class Produit
      */
     private $promo;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $active = 0;
+
     public function __construct()
     {
         $this->purchaseCarts = new ArrayCollection();
     }
 
-      /**
+    /**
      * 
      * @ORM\PrePersist
      * @ORM\PreUpdate 
      * @return void 
      */
-    public function initializeSlug(){
-        if(empty($this->slug)){
-            $slugify= new Slugify();
-            $this->slug =$slugify->slugify($this->nom);
+    public function initializeSlug()
+    {
+        if (empty($this->slug)) {
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->nom);
         }
     }
 
@@ -151,10 +157,10 @@ class Produit
         return $this;
     }
 
-    
+
     /**
      * Get the value of prix
-     */ 
+     */
     public function getPrix()
     {
         return $this->prix;
@@ -164,7 +170,7 @@ class Produit
      * Set the value of prix
      *
      * @return  self
-     */ 
+     */
     public function setPrix($prix)
     {
         $this->prix = $prix;
@@ -240,7 +246,7 @@ class Produit
 
     /**
      * Get the value of slug
-     */ 
+     */
     public function getSlug()
     {
         return $this->slug;
@@ -250,11 +256,31 @@ class Produit
      * Set the value of slug
      *
      * @return  self
-     */ 
+     */
     public function setSlug($slug)
     {
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(?bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of active
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }
