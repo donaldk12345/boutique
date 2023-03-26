@@ -68,9 +68,15 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
      */
     private $purchases;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="userProduit")
+     */
+    private $produits;
+
     public function __construct()
     {
         $this->purchases = new ArrayCollection();
+        $this->produits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,6 +199,36 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($purchase->getUserPurchase() === $this) {
                 $purchase->setUserPurchase(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->setUserProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->removeElement($produit)) {
+            // set the owning side to null (unless already changed)
+            if ($produit->getUserProduit() === $this) {
+                $produit->setUserProduit(null);
             }
         }
 

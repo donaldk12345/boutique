@@ -7,6 +7,8 @@ use App\Form\ProduitType;
 use App\Form\Produit1Type;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,10 +25,16 @@ class ProduitController extends AbstractController
      *@Route("/produit", name="produit") 
      *@Security("is_granted('ROLE_ADMIN')") 
      */
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(ProduitRepository $produitRepository, PaginatorInterface $paginator, Request $request, ManagerRegistry $doctrine): Response
     {
+        $donnees = $doctrine->getRepository(Produit::class)->findAll();
+        $produits = $paginator->paginate(
+            $donnees,
+            $request->query->getInt('page', 1),
+            5
+        );
         return $this->render('produit/index.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produits' => $produits
         ]);
     }
 
@@ -38,6 +46,19 @@ class ProduitController extends AbstractController
     {
         $produit = $produitRepository->findOneBy(['id' => $id]);
         $produit->setActive(($produit->getActive()) ? false : true);
+        $em->persist($produit);
+        $em->flush($produit);
+
+        return new Response("true");
+    }
+
+    /**
+     *@Route("/promo/{id}", name="promo",methods={"GET","POST"})
+     */
+    public function enPromo(ProduitRepository $produitRepository, EntityManagerInterface $em, $id)
+    {
+        $produit = $produitRepository->findOneBy(['id' => $id]);
+        $produit->setPromo(($produit->getPromo()) ? false : true);
         $em->persist($produit);
         $em->flush($produit);
 

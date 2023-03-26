@@ -1,13 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit index
+{% block title %}Produits
 {% endblock %}
-
 {% block body %}
+	<style>
+		.pagina {
+			margin-left: 15px;
+			margin-bottom: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.page-item.active .page-link {
+			background-color: #30302fcc !important;
+
+
+			border: none;
+			color: #fff !important;
+		}
+		.page-link {
+			color: #30302fcc !important;
+
+
+			outline: none !important;
+		}
+	</style>
+
 
 	<div class="container mt-4">
 		<div class="text-center">
-			<h4 class="text-muted">Liste des produits
+			<h4 class="text-muted">Liste des produits&nbsp;&nbsp; (
+				{{ produits|length }}
+				)
 			</h4>
 		</div>
 		<table class="table mt-2">
@@ -18,7 +42,11 @@
 				<th>Prix</th>
 				<th>Quantite</th>
 				<th>Photo</th>
-			    <th>Statut</th>
+				<th>Categorie</th>
+				<th>User</th>
+				{# <th>Promo</th> #}
+				<th>Date</th>
+				<th>Statut</th>
 				<th>Actions</th>
 			</tr>
 
@@ -37,12 +65,36 @@
 					</td>
 
 					<td><img src="{{ asset('uploads/images/' ~ produit.imageName) }} " style="width:70px!important; height:70px!important;"></td>
-					<td><div class="form-check form-switch"><input class="form-check-input"   type="checkbox"  {{ (produit.active) ? 'checked': '' }}  role="switch" id="flexSwitchCheckChecked" data-id=" {{produit.id}} "></div></td>
+					<td>
+						<p>
+							{{ produit.category.nom }}
+						</p>
+					</td>
+
+					<td>
+						<p>
+							{{ produit.userProduit.username }}
+						</p>
+					</td>
+					{# <td>
+																																									<div class="form-check form-switch"><input class="form-check-input" type="checkbox" {{ (produit.promo) ? 'checked': '' }} role="switch" id="flexSwitchCheckChecked" data-id=" {{produit.id}} "></div>
+																																								</td> #}
+
+					<td>
+						<p>
+							{{ produit.createdAt | date('d/m/Y H:i') }}
+
+						</p>
+					</td>
+
+					<td>
+						<div class="form-check form-switch"><input class="form-check-input" type="checkbox" {{ (produit.active) ? 'checked': '' }} role="switch" id="flexSwitchCheckChecked" data-id=" {{produit.id}} "></div>
+					</td>
 
 					<td class="actions">
 						<a href="{{ path('produit_delete_data', {id: produit.id})}}" data-delete data-token="{{ csrf_token('delete' ~ produit.id )}}" class="btn btn-sm btn-danger">Delete</a>
 						<a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-sm btn-success bg-success-light">Edit</a>
-					    
+
 					</td>
 				</tr>
 			{% else %}
@@ -52,6 +104,12 @@
 			{% endfor %}
 
 		</table>
+		<div class="pagina mt-2">
+			<div class="pagination">
+				{{ knp_pagination_render(produits) }}
+			</div>
+		</div>
+
 		<div class="col-md mb-2">
 			<a href="{{ path('new-produits') }}" class="btn btn-sm btn-secondary">Nouveau produit</a>
 		</div>
@@ -59,18 +117,36 @@
 	{% block javascripts %}
 		<script src="{{ asset('js/produit.js') }}"></script>
 		<script>
-	window.onload = () => {
-    let activer = document.querySelectorAll("[type=checkbox]");
+			window.onload = () => {
+let activer = document.querySelectorAll("[type=checkbox]");
 
-    for (let bouton of activer) {
-        bouton.addEventListener('click', function() {
-            let xmlHttp = new XMLHttpRequest;
-            xmlHttp.open("get", `/activer/${this.dataset.id}`);
-            xmlHttp.send();
-        })
-    }
+for (let bouton of activer) {
+bouton.addEventListener('click', function () {
+let xmlHttp = new XMLHttpRequest;
+xmlHttp.open("get", `/activer/${
+this.dataset.id
+}`);
+xmlHttp.send();
+})
+}
 }
 		</script>
+		{# <script>
+																	window.onload = () => {
+														let promo = document.querySelectorAll("[type=checkbox]");
+														
+														for (let bouton of promo) {
+														bouton.addEventListener('click', function () {
+														let xmlHttp = new XMLHttpRequest;
+														xmlHttp.open("get", `/promo/${
+														this.dataset.id
+														}`);
+														xmlHttp.send();
+														})
+														}
+														}
+																</script> #}
+
 
 	{% endblock %}
 {% endblock %}

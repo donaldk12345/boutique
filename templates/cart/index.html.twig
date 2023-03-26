@@ -1,114 +1,137 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!{% endblock %}
+{% block title %}Hello CartController!
+{% endblock %}
 
 {% block body %}
-<style>
+	<style>
 
-.qt, .qt-plus, .qt-minus {
-	display: inline-block;
-	float: left;
-}
+		.qt,
+		.qt-plus,
+		.qt-minus {
+			display: inline-block;
+			float: left;
+		}
 
-.qt {
-	font-size: 19px;
-	line-height: 50px;
-	width: 70px;
-	text-align: center;
-}
+		.qt {
+			font-size: 19px;
+			line-height: 50px;
+			width: 70px;
+			text-align: center;
+		}
 
-.qt-plus, .qt-minus {
+		.qt-plus,
+		.qt-minus {
 
-	padding: 0 20px;
+			padding: 0 20px;
 
-}
-
-
-.qt-plus {
-	line-height: 50px;
-}
-
-.qt-minus {
-	line-height: 47px;
-}
-  @media(max-width:360px){
-    .table tr .ph{
-       display:none;
-    }
-   
-  }
-
-</style>
+		}
 
 
-   {% if items | length > 0  %}
-      <div class="container">
-       <h3 class="text-center mt-3"> Votre panier</h3>
-      <table class="table" border="0" style=" box-shadow: 0 3px 9px 3px rgb(0 0 0 / 1%);">
-          <tr style="background-color:var(--salmon-pink); color:#fff;">
-             <th>Nom </th>
-             <th class="ph">Photo </th>
-              <th class="">Prix </th>
-               <th>Quantité </th>
-                <th class="ph">Total </th>
-                <th></th>
-           </tr>
-             {% for item in items %}
-              <tr> 
-              <td> {{ item.produit.nom }} </td>
-              <td class="ph"><img src=" {{ asset('uploads/images/' ~ item.produit.imageName) }} " style="width:50px; height:50px; border-radius:50%;"></td>
-              <td class=""> {{ item.produit.prix }} </td>
-              <td style="padding: 13px 16px!important;"> 
+		.qt-plus {
+			line-height: 50px;
+		}
 
-               {% if  item.quantite > 1 %}
-                 <span class="qt-minus">
-                <a href="{{ path("cart_decrement", {'id': item.produit.id}) }}" class="btn btn-sm " style="background-color:hsl(0, 0%, 93%);">
-								<i class="fas fa-minus"></i>
-							  </a> 
-                 </span>
-               {% endif %}
-               &nbsp;
-              <span class="qt text-center">
-              {{  item.quantite }}
-              </span>
-              &nbsp;
-               {% if  item.quantite >=1   %}
-              <span class="qt-plus">
-              <a href="{{ path("card_add", {'id': item.produit.id}) }}?returnToCart=true" class="btn btn-sm" style="background-color:hsl(0, 0%, 93%);">
-								<i class="fas fa-plus"></i>
-							</a>
-                 </span>  
-              {% endif  %}
-           
-              
-              </td>
-               <td class="ph">  {{ item.produit.prix * item.quantite }} </td>
-               <td>  <a href=" {{ path('cart-remove' , { 'id': item.produit.id } ) }} " class="btn btn-sm btn-out" style="display:inline-block;">delete</a></td>
-              </tr>
-             {% endfor %}
-                    <tr class="col-md">  
-                      <td colspan="3" class="text-right col-md"> Total: </td>
-                       <td> {{ total }} </td>
-                        
-                    
-                    </tr>
-               
-       </table>
-        <div class="text-center pb-3">
-        <a href=" {{ path('checkout') }} " class="add-cart-btn mt-4 col-md-2 m-auto">Continuer </a>
-        </div>
-       </div>
+		.qt-minus {
+			line-height: 47px;
+		}
+		@media(max-width:360px) {
+			.table tr .ph {
+				display: none;
+			}
 
-{%  else %}
-    <div class="container m-auto" style="padding-top: 104px;">
-      <div class="col-md-8 m-auto">
-    <div class="alert alert-warning text-center  animate__animated animate__fadeInUp" role="alert">
-                            Votre panier est vide  ! &nbsp;
-     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		}
+	</style>
 
-     </div>
-    </div>
-    </div>
-  {% endif %}
- 
+
+	{% if items | length > 0  %}
+		<div class="container">
+			<h3 class="text-center mt-3">
+				Votre panier</h3>
+			<table class="table" border="0" style=" box-shadow: 0 3px 9px 3px rgb(0 0 0 / 1%);">
+				<tr style="background-color:var(--salmon-pink); color:#fff;">
+					<th>Nom
+					</th>
+					<th class="ph">Photo
+					</th>
+					<th class="">Prix
+					</th>
+					<th>Quantité
+					</th>
+					<th class="ph">Total
+					</th>
+					<th></th>
+				</tr>
+				{% for item in items %}
+					<tr>
+						<td>
+							{{ item.produit.nom }}
+						</td>
+						<td class="ph"><img src=" {{ asset('uploads/images/' ~ item.produit.imageName) }} " style="width:50px; height:50px; border-radius:50%;"></td>
+						<td class="">
+							{{ item.produit.prix }}
+						</td>
+						<td style="padding: 13px 16px!important;">
+
+							{% if  item.quantite > 1 %}
+								<span class="qt-minus">
+									<a href="{{ path("cart_decrement", {'id': item.produit.id}) }}" class="btn btn-sm " style="background-color:hsl(0, 0%, 93%);">
+										<i class="fas fa-minus"></i>
+									</a>
+								</span>
+							{% endif %}
+							&nbsp;
+							<span class="qt text-center">
+								{{  item.quantite }}
+							</span>
+							&nbsp;
+							{% if  item.quantite >=1   %}
+								<span class="qt-plus">
+									<a href="{{ path("card_add", {'id': item.produit.id}) }}?returnToCart=true" class="btn btn-sm" style="background-color:hsl(0, 0%, 93%);">
+										<i class="fas fa-plus"></i>
+									</a>
+								</span>
+							{% endif  %}
+
+
+						</td>
+						<td class="ph">
+							{{ item.produit.prix * item.quantite }}
+						</td>
+						<td>
+							<a href=" {{ path('cart-remove' , { 'id': item.produit.id } ) }} " class="btn btn-sm btn-out" style="display:inline-block;" onsubmit(" return confirm('voulez vous supprimer le produit du panier ?')")>delete</a>
+
+						</td>
+					</tr>
+				{% endfor %}
+				<tr class="col-md">
+					<td colspan="3" class="text-right col-md">
+						Total:
+					</td>
+					<td>
+						{{ total }}
+					</td>
+
+
+				</tr>
+
+			</table>
+			<div class="text-center pb-3">
+				<a href=" {{ path('checkout') }} " class="add-cart-btn mt-4 col-md-2 m-auto">Continuer
+				</a>
+			</div>
+		</div>
+
+	{%  else %}
+		<div class="container m-auto" style="padding-top: 104px;">
+			<div class="col-md-8 m-auto">
+				<div class="alert alert-warning text-center  animate__animated animate__fadeInUp" role="alert">
+					Votre panier est vide  ! &nbsp;
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
 {% endblock %}

@@ -86,6 +86,11 @@ class Produit
      */
     private $active = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="produits")
+     */
+    private $userProduit;
+
     public function __construct()
     {
         $this->purchaseCarts = new ArrayCollection();
@@ -282,5 +287,25 @@ class Produit
     public function getActive()
     {
         return $this->active;
+    }
+
+    public function getUserProduit(): ?User
+    {
+        return $this->userProduit;
+    }
+
+    public function setUserProduit(?User $userProduit): self
+    {
+        $this->userProduit = $userProduit;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of promo
+     */
+    public function getPromo()
+    {
+        return $this->promo;
     }
 }

@@ -21,10 +21,10 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(ProduitRepository $produitRepository): Response
     {
-       
+
         return $this->render('home/index.html.twig', [
-            'produits'=>$produitRepository->findByMin()
-        
+            'produits' => $produitRepository->findByMin()
+
         ]);
     }
 
@@ -33,29 +33,30 @@ class HomeController extends AbstractController
      * @Route("/new-produits", name="new-produits")
      * @Security("is_granted('ROLE_ADMIN')") 
      */
-    public function insertProduit(Request $request, EntityManagerInterface $manager,SluggerInterface $slugger): Response
+    public function insertProduit(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
 
-        $produit =new Produit();
-        $form=$this->CreateForm(ProduitType::class ,$produit);
+        $produit = new Produit();
+        $form = $this->CreateForm(ProduitType::class, $produit);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $file = $form->get('imageName')->getData();
-            if($file){
+            if ($file) {
                 $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+                $fileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
                 // Move the file to the directory where brachures are stored
-                try{
+                try {
                     $file->move(
                         $this->getParameter('images_directory'), // in Servis.yaml defined folder for
                         $fileName
                     );
-                } catch (FileException $e){
+                } catch (FileException $e) {
                     // ... handle exception f something happens during file upload
                 }
                 $produit->setImageName($fileName);
+                $produit->setUserProduit($this->getUser("user_id"));
             }
             $produit->setCreatedAt(new \DateTimeImmutable());
             $manager->persist($produit);
@@ -63,31 +64,30 @@ class HomeController extends AbstractController
             $manager->flush();
             return $this->redirectToRoute('produit');
         }
-        
+
 
         return $this->render('home/produit.html.twig', [
-            'form' =>$form->createView()
+            'form' => $form->createView()
         ]);
-           
     }
 
-     /**
+    /**
      * 
      * @Route("/category", name="category")
      * @Security("is_granted('ROLE_ADMIN')") 
      * 
      */
-    public function categorieSave(Request $request, EntityManagerInterface $manager){
+    public function categorieSave(Request $request, EntityManagerInterface $manager)
+    {
         $category = new Category();
-        $form=$this->createForm(CategoryType::class, $category);
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $manager->persist($category);
             $manager->flush();
-
         }
-        return $this->render('home/category.html.twig',[
+        return $this->render('home/category.html.twig', [
             'form' => $form->createView()
         ]);
     }
