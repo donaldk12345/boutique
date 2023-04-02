@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	<section style="background-color: #eee;">
+		<div class="container py-5">
+			{% if app.user %}
+
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="card mb-4">
+							<div class="card-body text-center m-auto">
+
+								<h5 class="my-3">
+									{{ app.user.username }}
+								</h5>
+								<p class="text-muted mb-1">
+									{{ app.user.email }}
+								</p>
+								<p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+
+							</div>
+						</div>
+
+					</div>
+					<div class="col-lg-8">
+						<h4 class="text-center">Mes produits publier&nbsp;{{app.user.produits | length}}</h1>
+						<div class="row m-2 m-auto">
+							{% for promo in app.user.produits %}
+
+								<div class="card mb-3 m-2" style="width:10rem;">
+									<div class="col-md">
+										<img class="card-img card-img-left" src="{{ asset('uploads/images/' ~ promo.imageName) }}" style="height:20vh;" alt="Card image"/>
+									</div>
+									<div class="col-md">
+										<div class="card-body">
+											<a href="{{ path('details' , {'slug': promo.slug } )}}" class="text-decoration-none text-muted text-small" style="color:hsl(353, 100%, 78%)!important;">{{ promo.nom }}</a>
+											<p class="card-text">
+												<small class="text-muted">
+													{{ promo.prix }}
+													&nbsp;XAF</small>
+											</p>
+											<span class="col-md">
+												<a href="{{ path('app_produit_edit', {'id': promo.id}) }}" class="btn btn-sm btn-success bg-success-light" style="margin:10px;">Modifier</a>&nbsp;
+												<a href="{{ path('produit_delete_data', {id: promo.id})}}" data-delete data-token="{{ csrf_token('delete' ~ promo.id )}}" class="btn btn-sm btn-danger">Supprimer</a>
+
+											</span>
+
+										</div>
+									</div>
+								</div>
+
+
+							{% endfor %}
+
+						</div>
+					</div>
+				</div>
+			{% endif %}
+
+		</div>
+	</section>
+{% endblock %}
